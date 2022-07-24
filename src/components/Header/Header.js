@@ -7,7 +7,7 @@ import {Button} from "@mui/material";
 export default function Header() {
 
   const {handleGetLink, login} = useHandleLogin()
-  const {url,error,loading} = login;
+  const {url,error,loading,status} = login;
 
 
   useEffect(()=> {
@@ -32,7 +32,7 @@ export default function Header() {
           :
 
           (error ?
-          <div>some error</div>
+          <div>some error {status}</div>
 
           : (url.length ?
                 <Button

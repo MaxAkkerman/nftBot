@@ -3,7 +3,7 @@ import { useState } from "react";
 // import { Token, UseSelectPopupArg } from "../types";
 
 export default function useHandleLogin() {
-  const [login, setLogin] = useState({error:false, url:"",loading:false});
+  const [login, setLogin] = useState({error:false, status:null,url:"",loading:false});
 
   async function handleGetLink() {
     setLogin({...login, loading: true})
@@ -13,10 +13,10 @@ export default function useHandleLogin() {
         console.log("res", res)
         let url = await res.text()
         console.log("ruls", url)
-        setLogin({...login, url: url, loading: false})
+        setLogin({...login, url: url, status:res.status,loading: false})
 
       }else{
-        console.log('error')
+        console.log("error", res)
         setLogin({...login, error: true, loading: false})
       }
       
