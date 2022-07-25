@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {getLoginToken} from "../network/requests";
 
 // import { Token, UseSelectPopupArg } from "../types";
 
@@ -9,7 +10,7 @@ export default function useHandleLogin() {
   async function handleGetLink() {
     setLogin({...login, loading: true})
     try{
-      const res = await fetch("https://http-notifs.xyz/auth/login", {method: "POST", credentials:"include"})
+      const res = await getLoginToken()
       if (res.ok) {
         console.log("res", res)
         let url = await res.text()
