@@ -8,7 +8,7 @@ export default function useHandleLogin() {
   async function handleGetLink() {
     setLogin({...login, loading: true})
     try{
-      const res = await fetch("http://http-notifs.xyz/auth/login", {method: "POST", credentials:"include", headers: {"Access-Control-Allow-Origin": "*", "accept": "text/plain"}})
+      const res = await fetch("http://http-notifs.xyz/auth/login", {method: "POST", credentials:"include"})
       if (res.ok) {
         console.log("res", res)
         let url = await res.text()
