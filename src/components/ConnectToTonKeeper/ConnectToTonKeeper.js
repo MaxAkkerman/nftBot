@@ -1,10 +1,10 @@
-import "./Header.css";
+import "./ConnectToTonKeeper.css";
 import React, {useEffect, useState} from "react";
 import useHandleLogin from "../../hooks/useSelectPopup";
 import Loader from "../Loader/Loader.js";
 import {Button} from "@mui/material";
 
-export default function Header() {
+export default function ConnectToTonKeeper() {
 
   const {handleGetLink, login} = useHandleLogin()
   const {url,error,loading,status} = login;
