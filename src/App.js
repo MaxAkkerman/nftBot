@@ -6,9 +6,15 @@ import {getLoginToken, getMe} from "./network/requests";
 import Loader from "./components/Loader/Loader";
 import {AppEnter} from "./components/AppEnter/AppEnter";
 import {GetMyNfts} from "./components/GetMyNfts/GetMyNfts";
+import {webSocket} from "./webSocket/webSocket";
+import {useSelector} from "react-redux";
 
 function App() {
   
+
+  const pubkey = useSelector((state) => state.appReducer.pubkey);
+  const address = useSelector((state) => state.appReducer.address);
+
   useEffect(()=>{
     // await getUserTokens()
  
@@ -33,7 +39,7 @@ function App() {
       //   console.log('Disconnected webSocket');
       // }
     
-    // webSocket()
+    webSocket()
   },[])
   
 
@@ -42,12 +48,28 @@ function App() {
   
   
   return (
+    
     <div className="App">
       <Header/>
 
       <AppEnter/>
-      
-      
+
+      <>
+        {pubkey ? <div
+          id="nav-connect-wallet"
+          // className="btn wallet-btn"
+          variant={"outlined"}
+        >
+          user address from socket: {address}
+        </div> : null}
+        {address ? <div
+          id="nav-connect-wallet"
+          // className="btn wallet-btn"
+          variant={"outlined"}
+        >
+          user pubkey from socket: {pubkey}
+        </div> : null}
+      </>
       
     </div>
   );

@@ -31,7 +31,7 @@ export function AppEnter(){
     }
   }
     async function getNfts(){
-      const userNfts = await getUserTokens(user.address)
+      const userNfts = await getUserTokens()
       console.log("userNfts",await userNfts.json())
     }
   return(
