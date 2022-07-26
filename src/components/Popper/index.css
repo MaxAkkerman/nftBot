@@ -1,0 +1,13 @@
+.popper_container{
+  height: 30px;
+  display: flex;
+  justify-content: end;
+  margin: 10px;
+}
+.settings_wrap{
+  background: transparent;
+  border: none;
+}
+.popper_img{
+  height:100%;
+}

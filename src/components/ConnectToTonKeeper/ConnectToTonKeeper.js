@@ -25,6 +25,7 @@ export default function ConnectToTonKeeper() {
         <div onClick={()=>console.log(url,error,loading)}>
           Connect wallet
         </div>
+        
         {loading
           ?
           <Loader/>

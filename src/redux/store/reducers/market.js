@@ -5,7 +5,7 @@ import {
   SET_USER_DATA,
   GET_USER_DATA_LOADING_ACTION,
   GET_USER_DATA_SUCCESS,
-  GET_USER_DATA_FAILED
+  GET_USER_DATA_FAILED, REQUEST_USER_NFT_ITEM_LOADING, REQUEST_USER_NFT_ITEM_SUCCESS, REQUEST_USER_NFT_ITEM_FAILED
 } from "../actions/types";
 
 
@@ -20,9 +20,16 @@ const user_data = {
   fetchMeError: null,
 }
 
+const user_nfts = {
+  user_nfts_array: [],
+  userNftItemLoading:false,
+  userNftItemError: null,
+}
+
 const initialState = {
   ...websocket,
   ...user_data,
+  ...user_nfts
 };
 
 export default function appReducer(state = initialState, action) {
@@ -53,6 +60,26 @@ export default function appReducer(state = initialState, action) {
         draft.fetchMeError = true;
       });
 
+    case REQUEST_USER_NFT_ITEM_LOADING:
+      return produce(state, (draft) => {
+        draft.userNftItemLoading = true;
+      });
+    case REQUEST_USER_NFT_ITEM_SUCCESS:
+      return produce(state, (draft) => {
+        draft.user_nfts_array = [...draft.user_nfts_array, action.payload];
+        draft.userNftItemLoading = false;
+        draft.userNftItemError = false;
+      });
+    case REQUEST_USER_NFT_ITEM_FAILED:
+      return produce(state, (draft) => {
+        draft.userNftItemLoading = false;
+        draft.userNftItemError = true;
+      });
+      
+      
+      
+      
+      
     default:
       return state;
   }

@@ -1,6 +1,11 @@
 import {
   SET_WEBSOCKET_STATUS,
-  SET_USER_DATA, GET_USER_DATA_FETCH_ACTION, GET_USER_DATA_LOADING_ACTION, GET_USER_DATA_FAILED,GET_USER_DATA_SUCCESS
+  SET_USER_DATA,
+  GET_USER_DATA_FETCH_ACTION,
+  GET_USER_DATA_LOADING_ACTION,
+  GET_USER_DATA_FAILED,
+  GET_USER_DATA_SUCCESS,
+  REQUEST_USER_NFT_ITEM, REQUEST_USER_NFT_ITEM_LOADING, REQUEST_USER_NFT_ITEM_SUCCESS, REQUEST_USER_NFT_ITEM_FAILED
 } from "./types";
 
 export function setWebSocketStatus(status) {
@@ -44,6 +49,34 @@ export function getUserDataFailedAction(e) {
   };
 }
 
+
+
+export function requestUserNftItem(params) {
+  console.log("requestUserDataAction",params)
+  return {
+    type: REQUEST_USER_NFT_ITEM,
+    params
+  };
+}
+export function requestUserNftItemLoading() {
+  console.log("getUserDataLoadingAction")
+  return {
+    type: REQUEST_USER_NFT_ITEM_LOADING,
+  };
+}
+export function requestUserNftItemSuccess(user_data) {
+  console.log("getUserDataSuccess",user_data)
+  return {
+    type: REQUEST_USER_NFT_ITEM_SUCCESS,
+    payload:user_data
+  };
+}
+export function requestUserNftItemFailed(e) {
+  console.log("getUserDataFailedAction",e)
+  return {
+    type: REQUEST_USER_NFT_ITEM_FAILED,
+  };
+}
 
 
 
