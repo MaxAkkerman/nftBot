@@ -5,6 +5,7 @@ import {Button} from "@mui/material";
 import {getUserDataAction} from "../../redux/store/actions/market";
 import {useDispatch, useSelector} from "react-redux";
 import {baseUrl} from "../../network/constants";
+import axios from "axios";
 
 
 export function GetMeButton(){
@@ -25,7 +26,8 @@ export function GetMeButton(){
   async function openSale() {
     let newBody = JSON.stringify(body)
     
-    await fetch(`${baseUrl}/trades/open`, {method: "POST", body:newBody, credentials:"include"}).then(data=>console.log("openSale",data)).catch(e=>console.log("openSale err",e))
+    await axios(`${baseUrl}/trades/open`, {nftAddress: "EQCmmmLl_-SrbKR36uYUMOKieSrryuHVADJ7R4myQtOIuPpw",
+      nftPrice: 1},{method: "POST", credentials:"include"}).then(data=>console.log("openSale",data)).catch(e=>console.log("openSale err",e))
   }
   return(
     <>
