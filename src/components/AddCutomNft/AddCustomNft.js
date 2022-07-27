@@ -21,9 +21,8 @@ export default function AddCustomNft() {
   async function handleRequestNFT(e){
     e.preventDefault();
     console.log("inpValue",inpValue)
-    // dispatch(requestUserNftItem({nftAddress: inpValue}))
+    dispatch(requestUserNftItem({nftAddress: inpValue}))
 
-      await axios.put(`${baseUrl}/trades/close`, {tradeId:inpValue},{withCredentials:true}).then(data=>console.log("closeSale",data)).catch(e=>console.log("closeSale err",e))
 
     
     
@@ -36,7 +35,7 @@ export default function AddCustomNft() {
     >
       <InputBase
         sx={{ ml: 1, flex: 1, color:"#1976d2",opacity:"1" }}
-        placeholder="Search nft by its address"
+        placeholder="Search nft by address"
         inputProps={{ 'aria-label': 'OutlinedInput' }}
         variant={"outlined"}
         value={inpValue}

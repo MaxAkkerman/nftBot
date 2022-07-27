@@ -1,12 +1,43 @@
 import {baseUrl} from "./constants";
-
-
-export async function getLoginToken(){
-  return await fetch(`${baseUrl}/auth/login`, {method: "POST", credentials:"include"})
+import axios from "axios";
+const config = {
+  withCredentials:true
 }
-export async function getUserTokens(nftAddress){
-  return await fetch(`${baseUrl}/nfts/get-by-nft-address/${nftAddress}`, {method: "GET", credentials:"include"})
+//AUTH
+export async function getLoginToken(){
+  return await axios.post(`${baseUrl}/auth/login`, config)
 }
 export async function getMe(){
-  return await fetch(`${baseUrl}/auth/me`, {method: "GET", credentials:"include"})
+  return await axios.get(`${baseUrl}/auth/me`, config)
+}
+
+//GETTERS
+export async function getAllNftsByOwner(){
+  return await axios.get(`${baseUrl}/nfts/get-by-owner-address`, config)
+}
+export async function getByNftAddress(nftAddress){
+  return await axios.get(`${baseUrl}/nfts/get-by-nft-address/${nftAddress}`, config)
+}
+export async function getNFtbySellerAddress(tradeId){
+  return await axios.get(`${baseUrl}/trades/get-by-seller-address`, config)
+}
+export async function getNFtbyBuyerAddress(tradeId){
+  return await axios.get(`${baseUrl}/trades/get-by-buyer-address`, config)
+}
+export async function getNFtbySearchId(searchId){
+  return await axios.get(`${baseUrl}/trades/get-by-search-id/${searchId}`, config)
+}
+export async function getByTradeId(tradeId){
+  return await axios.get(`${baseUrl}/trades/${tradeId}`, config)
+}
+
+//CALL METHODS
+export async function openSale(nftAddress,nftPrice){
+  return await axios.post(`${baseUrl}/trades/open`, {nftAddress:nftAddress, nftPrice:nftPrice},config)
+}
+export async function closeSale(tradeId){
+  return await axios.put(`${baseUrl}/trades/close`, {tradeId:tradeId},config)
+}
+export async function cancelSale(tradeId){
+  return await axios.put(`${baseUrl}/trades/cancel`, {tradeId:tradeId},config)
 }

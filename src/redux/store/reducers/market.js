@@ -1,5 +1,5 @@
 import produce from "immer";
-
+import mockIcon from "../../../images/title.png"
 import {
   SET_WEBSOCKET_STATUS,
   SET_USER_DATA,
@@ -19,9 +19,9 @@ const user_data = {
   fetchMeLoading:false,
   fetchMeError: null,
 }
-
+let mock = {name:"NFTtest",collectionName:"NFTCollectionNametest",address:"test address", image:mockIcon}
 const user_nfts = {
-  user_nfts_array: [],
+  user_nfts_array: [mock,mock,mock,mock,mock,mock],
   userNftItemLoading:false,
   userNftItemError: null,
 }

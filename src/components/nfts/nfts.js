@@ -1,10 +1,10 @@
 import {Button} from "@mui/material";
 import React from "react";
-import {getUserTokens} from "../../network/requests";
+import {getByNftAddress} from "../../network/requests";
 
 export async function Nfts(){
   async function getNfts(){
-    const userNfts = await getUserTokens()
+    const userNfts = await getByNftAddress()
     console.log("userNfts",await userNfts.json())
   }
   return (

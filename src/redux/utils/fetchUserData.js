@@ -16,6 +16,6 @@ export default async function fetchUserData() {
 
   } catch (e) {
     console.log("fetchUserData error ", e)
-    return e
+    throw e
   }
 }

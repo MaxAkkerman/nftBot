@@ -1,0 +1,18 @@
+.user_nfts_container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 160px;
+  padding: 5px 25px;
+  margin-top: 40px;
+}
+.nft_item_wrapper{
+  height: 250px;
+}
+.nft_item_img_wrap{
+  height: 100%;
+}
+.nft_btns_wrap{
+  display:flex;
+  /*flex-direction: column;*/
+}

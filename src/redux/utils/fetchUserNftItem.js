@@ -1,9 +1,9 @@
-import {getUserTokens} from "../../network/requests";
+import {getByNftAddress} from "../../network/requests";
 
 export default async function fetchUserNftItem({params}) {
   console.log("nftAddress",params.nftAddress)
   try {
-    const res = await getUserTokens(params.nftAddress)
+    const res = await getByNftAddress(params.nftAddress)
     console.log("fetchUserNftItem", res)
     if (res.ok) {
       let userData = await res.json();
@@ -20,6 +20,6 @@ export default async function fetchUserNftItem({params}) {
 
   } catch (e) {
     console.log("fetchUserData error ", e)
-    return e
+    throw e
   }
 }
