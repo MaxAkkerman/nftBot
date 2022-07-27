@@ -19,11 +19,13 @@ export function GetMeButton(){
     dispatch(getUserDataAction())
   }
   let body = {
-    "nftAddress": "EQDD7r0ZIQew6yXcm0oFKVuteEfPfL3ptojxgQbIRQ2zKz2h",
-    "nftPrice": 1
+    nftAddress: "EQDD7r0ZIQew6yXcm0oFKVuteEfPfL3ptojxgQbIRQ2zKz2h",
+    nftPrice: 1
   }
   async function openSale() {
-    await fetch(`${baseUrl}/trades/open`, {method: "POST", body:JSON.stringify(body), credentials:"include"}).then(data=>console.log("openSale",data)).catch(e=>console.log("openSale err",e))
+    let newBody = JSON.stringify(body)
+    
+    await fetch(`${baseUrl}/trades/open`, {method: "POST", body:newBody, credentials:"include"}).then(data=>console.log("openSale",data)).catch(e=>console.log("openSale err",e))
   }
   return(
     <>
@@ -45,33 +47,33 @@ export function GetMeButton(){
         Open sale
       </Button>
       
-{/*    {fetchMeLoading*/}
-{/*      ?*/}
-{/*      <Loader/>*/}
-{/*      :*/}
-{/*      (fetchMeError ?*/}
-{/*        <div>Some network error {status}</div>*/}
+    {fetchMeLoading
+      ?
+      <Loader/>
+      :
+      (fetchMeError ?
+        <div>Some network error {status}</div>
 
-{/*        : (address ?*/}
-{/*            <>*/}
-{/*              <div*/}
-{/*                id="nav-connect-wallet"*/}
-{/*                // className="btn wallet-btn"*/}
-{/*                variant={"outlined"}*/}
-{/*              >*/}
-{/*                Your address: {address}*/}
-{/*              </div>*/}
-{/*              <div*/}
-{/*                id="nav-connect-wallet"*/}
-{/*                // className="btn wallet-btn"*/}
-{/*                variant={"outlined"}*/}
-{/*              >*/}
-{/*                Your pubkey: {pubkey}*/}
-{/*              </div>*/}
-{/*            </>*/}
-{/*            : null*/}
-{/*        ))*/}
-{/*}*/}
+        : (address ?
+            <>
+              <div
+                id="nav-connect-wallet"
+                // className="btn wallet-btn"
+                variant={"outlined"}
+              >
+                Your address: {address}
+              </div>
+              <div
+                id="nav-connect-wallet"
+                // className="btn wallet-btn"
+                variant={"outlined"}
+              >
+                Your pubkey: {pubkey}
+              </div>
+            </>
+            : null
+        ))
+}
     </>
   )
 }

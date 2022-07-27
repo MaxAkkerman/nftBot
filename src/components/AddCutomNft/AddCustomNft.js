@@ -22,7 +22,7 @@ export default function AddCustomNft() {
     console.log("inpValue",inpValue)
     // dispatch(requestUserNftItem({nftAddress: inpValue}))
 
-      await fetch(`${baseUrl}/trades/close`, {method: "PUT", body:JSON.stringify({tradeId:inpValue}), credentials:"include"}).then(data=>console.log("closeSale",data)).catch(e=>console.log("closeSale err",e))
+      await fetch(`${baseUrl}/trades/close`, {method: "PUT", credentials:"include", body:JSON.stringify({tradeId:inpValue})}).then(data=>console.log("closeSale",data)).catch(e=>console.log("closeSale err",e))
 
     
     
