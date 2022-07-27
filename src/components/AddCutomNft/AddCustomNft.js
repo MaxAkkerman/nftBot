@@ -23,7 +23,7 @@ export default function AddCustomNft() {
     console.log("inpValue",inpValue)
     // dispatch(requestUserNftItem({nftAddress: inpValue}))
 
-      await axios(`${baseUrl}/trades/close`, {tradeId:inpValue},{method: "PUT", credentials:"include"}).then(data=>console.log("closeSale",data)).catch(e=>console.log("closeSale err",e))
+      await axios.put(`${baseUrl}/trades/close`, {tradeId:inpValue},{withCredentials:true}).then(data=>console.log("closeSale",data)).catch(e=>console.log("closeSale err",e))
 
     
     

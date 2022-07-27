@@ -26,8 +26,8 @@ export function GetMeButton(){
   async function openSale() {
     let newBody = JSON.stringify(body)
     
-    await axios(`${baseUrl}/trades/open`, {nftAddress: "EQCmmmLl_-SrbKR36uYUMOKieSrryuHVADJ7R4myQtOIuPpw",
-      nftPrice: 1},{method: "POST", credentials:"include"}).then(data=>console.log("openSale",data)).catch(e=>console.log("openSale err",e))
+    await axios.post(`${baseUrl}/trades/open`, {nftAddress: "EQCmmmLl_-SrbKR36uYUMOKieSrryuHVADJ7R4myQtOIuPpw",
+      nftPrice: 1},{withCredentials:true}).then(data=>console.log("openSale",data)).catch(e=>console.log("openSale err",e))
   }
   return(
     <>
