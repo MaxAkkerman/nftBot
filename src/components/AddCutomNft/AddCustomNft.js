@@ -8,6 +8,7 @@ import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {requestUserNftItem} from "../../redux/store/actions/market";
 import {baseUrl} from "../../network/constants";
+import axios from "axios";
 
 export default function AddCustomNft() {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ export default function AddCustomNft() {
     console.log("inpValue",inpValue)
     // dispatch(requestUserNftItem({nftAddress: inpValue}))
 
-      await fetch(`${baseUrl}/trades/close`, {method: "PUT", credentials:"include", body:JSON.stringify({tradeId:inpValue})}).then(data=>console.log("closeSale",data)).catch(e=>console.log("closeSale err",e))
+      await axios(`${baseUrl}/trades/close`, {tradeId:inpValue},{method: "PUT", credentials:"include", headers:{"Access-Control-Allow-Methods": "POST, GET, PUT"}}).then(data=>console.log("closeSale",data)).catch(e=>console.log("closeSale err",e))
 
     
     
