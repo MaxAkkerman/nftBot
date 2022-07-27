@@ -19,7 +19,7 @@ export function GetMeButton(){
     dispatch(getUserDataAction())
   }
   let body = {
-    nftAddress: "EQDD7r0ZIQew6yXcm0oFKVuteEfPfL3ptojxgQbIRQ2zKz2h",
+    nftAddress: "EQCmmmLl_-SrbKR36uYUMOKieSrryuHVADJ7R4myQtOIuPpw",
     nftPrice: 1
   }
   async function openSale() {
