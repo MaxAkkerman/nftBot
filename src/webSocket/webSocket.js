@@ -5,7 +5,9 @@ import {setAuthUserData, setWebSocketStatus} from "../redux/store/actions/market
 const { io } = require("socket.io-client");
 
 export async function webSocket(){
-  const socket = io(`${baseUrl}`);
+  const socket = io(`${baseUrl}`,{
+    withCredentials: true,
+  });
   socket.on('connect', function() {
     console.log('Connected');
     reduxStore.dispatch(

@@ -4,6 +4,7 @@ import {getMe, getUserTokens} from "../../network/requests";
 import {Button} from "@mui/material";
 import {getUserDataAction} from "../../redux/store/actions/market";
 import {useDispatch, useSelector} from "react-redux";
+import {baseUrl} from "../../network/constants";
 
 
 export function GetMeButton(){
@@ -17,7 +18,13 @@ export function GetMeButton(){
   async function handleGoIntoApp() {
     dispatch(getUserDataAction())
   }
-    
+  let body = {
+    "nftAddress": "EQDD7r0ZIQew6yXcm0oFKVuteEfPfL3ptojxgQbIRQ2zKz2h",
+    "nftPrice": 1
+  }
+  async function openSale() {
+    await fetch(`${baseUrl}/trades/open`, {method: "POST", body:JSON.stringify(body), credentials:"include"}).then(data=>console.log("openSale",data)).catch(e=>console.log("openSale err",e))
+  }
   return(
     <>
     <Button
@@ -33,9 +40,9 @@ export function GetMeButton(){
         id="nav-connect-wallet"
         // className="btn wallet-btn"
         variant={"outlined"}
-        onClick={()=>console.log(pubkey,address,fetchMeLoading)}
+        onClick={()=>openSale()}
       >
-        consol Pubkey&Address
+        Open sale
       </Button>
       
 {/*    {fetchMeLoading*/}

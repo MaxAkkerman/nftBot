@@ -7,6 +7,7 @@ import {Button} from "@mui/material";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {requestUserNftItem} from "../../redux/store/actions/market";
+import {baseUrl} from "../../network/constants";
 
 export default function AddCustomNft() {
   const dispatch = useDispatch();
@@ -16,10 +17,15 @@ export default function AddCustomNft() {
     console.log("currentTarget",e.currentTarget.value)
     setInpValue(e.currentTarget.value)
   }
-  function handleRequestNFT(e){
+  async function handleRequestNFT(e){
     e.preventDefault();
     console.log("inpValue",inpValue)
-    dispatch(requestUserNftItem({nftAddress: inpValue}))
+    // dispatch(requestUserNftItem({nftAddress: inpValue}))
+
+      await fetch(`${baseUrl}/trades/close`, {method: "PUT", body:JSON.stringify({tradeId:inpValue}), credentials:"include"}).then(data=>console.log("closeSale",data)).catch(e=>console.log("closeSale err",e))
+
+    
+    
   }
   return (
     <Paper
