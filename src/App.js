@@ -25,7 +25,10 @@ function App() {
   // },[currentNft])
 
   useEffect(() => {
-    webSocket()
+    async function onWebSocket(){
+      await webSocket()
+    }
+    onWebSocket()
   }, [])
 
   // function closePopup(){

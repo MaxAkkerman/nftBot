@@ -12,9 +12,9 @@ export default function useHandleLogin() {
     try{
       const res = await getLoginToken()
       console.log("res",res)
-      if (res.status === 201) {
+      if (res.ok) {
         console.log("res", res)
-        let url = res.data
+        let url = await res.text()
         console.log("ruls", url)
         setLogin({...login, url: url, status:res.status,loading: false})
 
