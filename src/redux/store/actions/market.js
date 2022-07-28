@@ -5,9 +5,16 @@ import {
   GET_USER_DATA_LOADING_ACTION,
   GET_USER_DATA_FAILED,
   GET_USER_DATA_SUCCESS,
-  REQUEST_USER_NFT_ITEM, REQUEST_USER_NFT_ITEM_LOADING, REQUEST_USER_NFT_ITEM_SUCCESS, REQUEST_USER_NFT_ITEM_FAILED,
+  REQUEST_USER_NFT_ITEM,
+  REQUEST_USER_NFT_ITEM_LOADING,
+  REQUEST_USER_NFT_ITEM_SUCCESS,
+  REQUEST_USER_NFT_ITEM_FAILED,
   SET_CURRENT_NFT,
-  DELETE_CURRENT_NFT
+  DELETE_CURRENT_NFT,
+  REQUEST_USER_TRADES,
+  REQUEST_USER_TRADES_LOADING,
+  REQUEST_USER_TRADES_SUCCESS,
+  REQUEST_USER_TRADES_FAILED
 } from "./types";
 
 export function setWebSocketStatus(status) {
@@ -96,3 +103,28 @@ export function deleteCurrentNft() {
 
 
 
+export function requestUserTrades() {
+  console.log("requestUserTrades")
+  return {
+    type: REQUEST_USER_TRADES,
+  };
+}
+export function requestUserTradesLoading() {
+  console.log("requestUserTradesLoading")
+  return {
+    type: REQUEST_USER_TRADES_LOADING,
+  };
+}
+export function requestUserTradesSuccess(trades) {
+  console.log("requestUserTradesSuccess",trades)
+  return {
+    type: REQUEST_USER_TRADES_SUCCESS,
+    payload:trades
+  };
+}
+export function requestUserTradesFailed(e) {
+  console.log("requestUserTradesFailed",e)
+  return {
+    type: REQUEST_USER_TRADES_FAILED,
+  };
+}

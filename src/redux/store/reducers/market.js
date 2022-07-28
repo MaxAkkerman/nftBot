@@ -10,7 +10,7 @@ import {
   REQUEST_USER_NFT_ITEM_SUCCESS,
   REQUEST_USER_NFT_ITEM_FAILED,
   SET_CURRENT_NFT,
-  DELETE_CURRENT_NFT
+  DELETE_CURRENT_NFT, REQUEST_USER_TRADES_LOADING, REQUEST_USER_TRADES_SUCCESS, REQUEST_USER_TRADES_FAILED
 } from "../actions/types";
 
 
@@ -30,7 +30,11 @@ for(let i = 0; i<7; i++){
   arr.push({...mock,index:i})
 }
 
-
+const user_trades = {
+  user_trades: {},
+  user_trades_loading: false,
+  user_trades_error: false,
+}
 const user_nfts = {
   user_nfts_array: arr,
   userNftItemLoading:false,
@@ -41,7 +45,8 @@ const initialState = {
   ...websocket,
   ...user_data,
   ...user_nfts,
-  currentNft
+  currentNft,
+  ...user_trades
 };
 
 export default function appReducer(state = initialState, action) {
@@ -95,8 +100,24 @@ export default function appReducer(state = initialState, action) {
         draft.userNftItemLoading = false;
         draft.userNftItemError = true;
       });
-      
-      
+
+
+    case REQUEST_USER_TRADES_LOADING:
+      return produce(state, (draft) => {
+        draft.user_trades_loading = true;
+      });
+    case REQUEST_USER_TRADES_SUCCESS:
+      return produce(state, (draft) => {
+        draft.user_trades = action.payload;
+        draft.user_trades_loading = false;
+        draft.user_trades_error = false;
+      });
+    case REQUEST_USER_TRADES_FAILED:
+      return produce(state, (draft) => {
+        draft.user_trades_loading = false;
+        draft.user_trades_error = true;
+      });
+
       
       
       
