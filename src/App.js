@@ -16,6 +16,8 @@ function App() {
   const user_nfts_array = useSelector((state) => state.appReducer.user_nfts_array);
   const currentNft = useSelector((state) => state.appReducer.currentNft);
 
+  
+  
   // const [showNft,setShowNft] = useState(false)
   // useEffect(()=>{
   //   if(currentNft !== null){
@@ -39,7 +41,7 @@ function App() {
   return (
 
     <div className="App">
-      {address ?
+      {!address ?
         (
           <>
           {
