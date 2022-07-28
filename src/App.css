@@ -11,10 +11,13 @@ body{
 }
 
 .user_profile_img_wrap{
-  height:200px;
+  height: 200px;
+  width: fit-content;
+  align-self: center;
 }
 img{
   height:100%;
+  width:100%;
 }
 .nft_title{
   font-size:20px;

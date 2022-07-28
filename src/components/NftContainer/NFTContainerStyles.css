@@ -2,17 +2,33 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 5px;
-  grid-row-gap: 168px;
+  grid-row-gap: 65px;
   padding: 0px 0px;
   margin-top: 40px;
 }
 .nft_item_wrapper{
   height: 250px;
+  width:100%;
+  margin: auto;
+  max-width: 170px;
 }
 .nft_item_img_wrap{
-  height: 100%;
+  height: fit-content;
+  width: 100%;
 }
 .nft_btns_wrap{
   display:flex;
   /*flex-direction: column;*/
+}
+
+
+@media only screen and (min-width: 560px) {
+  .user_nfts_container{
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media only screen and (min-width: 800px) {
+  .user_nfts_container{
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }

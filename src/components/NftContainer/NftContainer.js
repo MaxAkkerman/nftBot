@@ -11,7 +11,7 @@ export function NftView() {
   const userNftItemError = useSelector((state) => state.appReducer.userNftItemError);
 
   function retryRequest(){
-    
+
   }
   return (
     <>
@@ -48,7 +48,7 @@ export function NftView() {
         :
         ((user_nfts_array && user_nfts_array.length >0) ?
             <div className={"user_nfts_container"}>
-            {user_nfts_array.length && user_nfts_array.map(item => {
+              {user_nfts_array.length && user_nfts_array.map(item => {
 
                 return <div className={"nft_item_wrapper"} key={item.address}>
                   <div className={"nft_item_img_wrap"}>
@@ -64,31 +64,15 @@ export function NftView() {
                     nft address: {item.address}
                   </div>
 
-                  <ButtonGroup size={"small"} sx={{marginTop:"20px"}} variant="outlined" aria-label="outlined button group">
-                    <Button sx={{
-                      fontSize:"10px"
-                    }}>open</Button>
-                    <Button sx={{
-                      fontSize:"10px"
-                    }}>cancel</Button>
-                    <Button sx={{
-                      fontSize:"10px"
-                    }}>close</Button>
+                  <ButtonGroup size={"small"} sx={{marginTop:"20px",width:"100%"}} variant="outlined" aria-label="outlined button group">
+                    <Button sx={{fontSize:"10px"}}>open</Button>
+                    <Button sx={{fontSize:"10px"}}>cancel</Button>
+                    <Button sx={{fontSize:"10px"}}>close</Button>
                   </ButtonGroup>
-                  {/*<div className={"nft_btns_wrap"}>*/}
-                  {/*  <Button style={{fontSize:"10px"}}>*/}
-                  {/*    <span>open sale</span>*/}
-                  {/*  </Button>*/}
-                  {/*  <Button style={{fontSize:"10px"}}>*/}
-                  {/*    cancel sale*/}
-                  {/*  </Button>*/}
-                  {/*  <Button style={{fontSize:"10px"}}>*/}
-                  {/*    close sale*/}
-                  {/*  </Button>*/}
-                  {/*</div>*/}
-                  
+
+
                 </div>})
-            }
+              }
             </div>
             :
             <div
