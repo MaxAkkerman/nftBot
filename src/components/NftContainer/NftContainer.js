@@ -3,7 +3,7 @@ import React from "react";
 import {useSelector} from "react-redux";
 import Loader from "../Loader/Loader";
 import "./NFTContainerStyles.css"
-import {Button} from "@mui/material";
+import {Button, ButtonGroup} from "@mui/material";
 
 export function NftView() {
   const user_nfts_array = useSelector((state) => state.appReducer.user_nfts_array);
@@ -63,18 +63,29 @@ export function NftView() {
                   <div>
                     nft address: {item.address}
                   </div>
-                  
-                  <div className={"nft_btns_wrap"}>
-                    <Button>
-                      open sale
-                    </Button>
-                    <Button>
-                      cancel sale
-                    </Button>
-                    <Button>
-                      close sale
-                    </Button>
-                  </div>
+
+                  <ButtonGroup size={"small"} sx={{marginTop:"20px"}} variant="outlined" aria-label="outlined button group">
+                    <Button sx={{
+                      fontSize:"10px"
+                    }}>open</Button>
+                    <Button sx={{
+                      fontSize:"10px"
+                    }}>cancel</Button>
+                    <Button sx={{
+                      fontSize:"10px"
+                    }}>close</Button>
+                  </ButtonGroup>
+                  {/*<div className={"nft_btns_wrap"}>*/}
+                  {/*  <Button style={{fontSize:"10px"}}>*/}
+                  {/*    <span>open sale</span>*/}
+                  {/*  </Button>*/}
+                  {/*  <Button style={{fontSize:"10px"}}>*/}
+                  {/*    cancel sale*/}
+                  {/*  </Button>*/}
+                  {/*  <Button style={{fontSize:"10px"}}>*/}
+                  {/*    close sale*/}
+                  {/*  </Button>*/}
+                  {/*</div>*/}
                   
                 </div>})
             }

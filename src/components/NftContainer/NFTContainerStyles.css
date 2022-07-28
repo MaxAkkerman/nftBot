@@ -1,9 +1,9 @@
 .user_nfts_container{
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-column-gap: 10px;
-  grid-row-gap: 160px;
-  padding: 5px 25px;
+  grid-column-gap: 5px;
+  grid-row-gap: 168px;
+  padding: 0px 0px;
   margin-top: 40px;
 }
 .nft_item_wrapper{
