@@ -36,6 +36,11 @@ export default function ConnectToTonKeeper() {
           <div>some error {status}</div>
 
           : (url.length ?
+                <>
+                <div>
+                <a href={url}>
+                  {url}</a>
+                </div>
                 <Button
                   id="nav-connect-wallet"
                   // className="btn wallet-btn"
@@ -44,6 +49,7 @@ export default function ConnectToTonKeeper() {
                 >
                   <a href={url}>TonKeeper</a>
                 </Button>
+                </>
           : null
           ))
         }
