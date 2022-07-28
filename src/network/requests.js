@@ -41,5 +41,5 @@ export async function closeSaleRequest(tradeId){
 }
 
 export async function cancelSaleRequest(tradeId){
-  return await axios.put(`${baseUrl}/trades/cancel`, {tradeId:tradeId},config)
+  return await axios.post(`${baseUrl}/trades/cancel`, {tradeId:tradeId},config)
 }

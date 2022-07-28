@@ -5,6 +5,7 @@ import Loader from "../Loader/Loader";
 import "./NFTContainerStyles.css"
 import {Button, ButtonGroup} from "@mui/material";
 import {setCurrentNft} from "../../redux/store/actions/market";
+import {closeSaleRequest, openSaleRequest} from "../../network/requests";
 
 export function NftView() {
   const dispatch = useDispatch();
@@ -20,10 +21,20 @@ export function NftView() {
     let curF = user_nfts_array.filter(it=>+e.currentTarget.id===it.index)
     dispatch(setCurrentNft(curF[0]))
   }
-  
+  async function byeNft(){
+    try {
+      let res = await closeSaleRequest("886583")
+
+      let json = await res.json()
+      console.log("closeSaleRequest", json)
+    } catch (e) {
+      console.log("closeSaleRequest error", e)
+    }
+    
+  }
   return (
     <>
-      <div className={"nft_title"}>
+      <div className={"nft_title"} onClick={()=>byeNft()}>
         User NFTs
       </div>
 
