@@ -32,6 +32,17 @@ export async function webSocket(){
   });
   socket.on('trade-update', function(data) {
     console.log('trade-update', data);
+    let json = JSON.stringify([data])
+    let trades = JSON.parse(localStorage.getItem("trades"))
+    if(!trades){
+      localStorage.setItem("trades", json)
+    }else{
+      trades.push(data);
+      let json = JSON.stringify([data])
+      localStorage.setItem("trades", json)
+    }
+    
+   
   });
   socket.on('disconnect', function() {
     console.log('Disconnected');

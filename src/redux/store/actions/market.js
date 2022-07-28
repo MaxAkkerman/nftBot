@@ -5,7 +5,9 @@ import {
   GET_USER_DATA_LOADING_ACTION,
   GET_USER_DATA_FAILED,
   GET_USER_DATA_SUCCESS,
-  REQUEST_USER_NFT_ITEM, REQUEST_USER_NFT_ITEM_LOADING, REQUEST_USER_NFT_ITEM_SUCCESS, REQUEST_USER_NFT_ITEM_FAILED
+  REQUEST_USER_NFT_ITEM, REQUEST_USER_NFT_ITEM_LOADING, REQUEST_USER_NFT_ITEM_SUCCESS, REQUEST_USER_NFT_ITEM_FAILED,
+  SET_CURRENT_NFT,
+  DELETE_CURRENT_NFT
 } from "./types";
 
 export function setWebSocketStatus(status) {
@@ -78,8 +80,19 @@ export function requestUserNftItemFailed(e) {
   };
 }
 
-
-
+export function setCurrentNft(nft) {
+  console.log("setCurrentNft",nft)
+  return {
+    type: SET_CURRENT_NFT,
+    payload:nft
+  };
+}
+export function deleteCurrentNft() {
+  console.log("deleteCurrentNft")
+  return {
+    type: DELETE_CURRENT_NFT,
+  };
+}
 
 
 

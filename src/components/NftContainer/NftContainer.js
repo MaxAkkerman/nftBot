@@ -1,11 +1,13 @@
 import AddCustomNft from "../AddCutomNft/AddCustomNft";
 import React from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Loader from "../Loader/Loader";
 import "./NFTContainerStyles.css"
 import {Button, ButtonGroup} from "@mui/material";
+import {setCurrentNft} from "../../redux/store/actions/market";
 
 export function NftView() {
+  const dispatch = useDispatch();
   const user_nfts_array = useSelector((state) => state.appReducer.user_nfts_array);
   const userNftItemLoading = useSelector((state) => state.appReducer.userNftItemLoading);
   const userNftItemError = useSelector((state) => state.appReducer.userNftItemError);
@@ -13,6 +15,12 @@ export function NftView() {
   function retryRequest(){
 
   }
+  
+  async function handleClickNft(e,nft){
+    let curF = user_nfts_array.filter(it=>+e.currentTarget.id===it.index)
+    dispatch(setCurrentNft(curF[0]))
+  }
+  
   return (
     <>
       <div className={"nft_title"}>
@@ -49,8 +57,7 @@ export function NftView() {
         ((user_nfts_array && user_nfts_array.length >0) ?
             <div className={"user_nfts_container"}>
               {user_nfts_array.length && user_nfts_array.map(item => {
-
-                return <div className={"nft_item_wrapper"} key={item.address}>
+                return <div className={"nft_item_wrapper"} id={item.index} onClick={(e,item)=>handleClickNft(e,item)} key={item.i}>
                   <div className={"nft_item_img_wrap"}>
                     <img src={item.image} alt={"img"}/>
                   </div>
@@ -63,14 +70,6 @@ export function NftView() {
                   <div>
                     nft address: {item.address}
                   </div>
-
-                  <ButtonGroup size={"small"} sx={{marginTop:"20px",width:"100%"}} variant="outlined" aria-label="outlined button group">
-                    <Button sx={{fontSize:"10px"}}>open</Button>
-                    <Button sx={{fontSize:"10px"}}>cancel</Button>
-                    <Button sx={{fontSize:"10px"}}>close</Button>
-                  </ButtonGroup>
-
-
                 </div>})
               }
             </div>

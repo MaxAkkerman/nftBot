@@ -5,7 +5,12 @@ import {
   SET_USER_DATA,
   GET_USER_DATA_LOADING_ACTION,
   GET_USER_DATA_SUCCESS,
-  GET_USER_DATA_FAILED, REQUEST_USER_NFT_ITEM_LOADING, REQUEST_USER_NFT_ITEM_SUCCESS, REQUEST_USER_NFT_ITEM_FAILED
+  GET_USER_DATA_FAILED,
+  REQUEST_USER_NFT_ITEM_LOADING,
+  REQUEST_USER_NFT_ITEM_SUCCESS,
+  REQUEST_USER_NFT_ITEM_FAILED,
+  SET_CURRENT_NFT,
+  DELETE_CURRENT_NFT
 } from "../actions/types";
 
 
@@ -20,20 +25,35 @@ const user_data = {
   fetchMeError: null,
 }
 let mock = {name:"NFTtest",collectionName:"NFTCollectionNametest",address:"test address", image:mockIcon}
+let arr = []
+for(let i = 0; i<7; i++){
+  arr.push({...mock,index:i})
+}
+
+
 const user_nfts = {
-  user_nfts_array: [mock,mock,mock,mock,mock,mock],
+  user_nfts_array: arr,
   userNftItemLoading:false,
   userNftItemError: null,
 }
-
+const currentNft = null
 const initialState = {
   ...websocket,
   ...user_data,
-  ...user_nfts
+  ...user_nfts,
+  currentNft
 };
 
 export default function appReducer(state = initialState, action) {
   switch (action.type) {
+    case DELETE_CURRENT_NFT:
+      return produce(state, (draft) => {
+        draft.currentNft = null;
+      });
+    case SET_CURRENT_NFT:
+      return produce(state, (draft) => {
+        draft.currentNft = action.payload;
+      });
     case SET_WEBSOCKET_STATUS:
       return produce(state, (draft) => {
         draft.wssStatus = action.payload;
