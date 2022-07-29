@@ -9,6 +9,13 @@ import PopperApp from "./components/Popper/Popper";
 import {TitleMenu} from "./components/TitleMenu/TitleMenu";
 import {NftView} from "./components/NftContainer/NftContainer";
 import {NftItemView} from "./components/NftItemView/NftItemView";
+import {getMe} from "./network/requests";
+import {setAuthUserData} from "./redux/store/actions/market";
+import {getMeK} from "./utils/utils";
+import {reduxStore} from "./lib/redux";
+
+
+
 
 function App() {
   const pubkey = useSelector((state) => state.appReducer.pubkey);
@@ -17,20 +24,55 @@ function App() {
   const currentNft = useSelector((state) => state.appReducer.currentNft);
   const currentTrade = useSelector((state) => state.appReducer.currentTrade);
 
-  
-  
-  // const [showNft,setShowNft] = useState(false)
-  // useEffect(()=>{
-  //   if(currentNft !== null){
-  //     setShowNft(currentNft)
-  //   }
-  //    
-  // },[currentNft])
+  const [currentCount, setCount] = useState(false);
 
+  async function check() {
+    let result = await getMeK()
+    if(result){
+      reduxStore.dispatch(result)
+      return true
+    }else{
+      return false
+    }
+  }
+  
+  // useEffect(() => {
+  //   if (currentCount) {
+  //     return;
+  //   }
+  //
+  //   const id = setInterval(timer, 2000);
+  //   return () => clearInterval(id);
+  // }, [currentCount]);
+  //
+  // const timer = async () => {
+  //   let r = await check()
+  //   if(r){
+  //     setCount(r)
+  //   }
+  //
+  // };
+  //
+  // console.log(currentCount);
+  
+  
+  
+  
+//   setInterval(check, 2000);
+//   useEffect(() => {
+//     check()
+//   }, []);
+
+
+
+  
+  
+  
   useEffect(() => {
-    async function onWebSocket(){
+    async function onWebSocket() {
       await webSocket()
     }
+
     onWebSocket()
   }, [])
 
@@ -45,33 +87,31 @@ function App() {
       {address ?
         (
           <>
-          {
-            currentNft ?
-              <NftItemView/>
-              :
-              
-              (currentTrade ?
-                  <div>tradeItem</div>
-              :
-              <>
-                <PopperApp/>
-                <TitleMenu/>
-                <NftView/>
-                <div style={{marginTop: "200px", borderTop: "2px solid black"}}>
-                  DEV
-                </div>
-              </>
-            )
-          }
+            {
+              currentNft ?
+                <NftItemView/>
+                :
+
+                (currentTrade ?
+                    <div>tradeItem</div>
+                    :
+                    <>
+                      <PopperApp/>
+                      <TitleMenu/>
+                      <NftView/>
+                      <div style={{marginTop: "200px", borderTop: "2px solid black"}}>
+                        DEV
+                      </div>
+                    </>
+                )
+            }
           </>)
-          
-          
-        
+
 
         :
         <ConnectToTonKeeper/>
       }
-      
+
       {/*<GetMeButton/>*/}
     </div>
 
