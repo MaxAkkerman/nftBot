@@ -15,8 +15,8 @@ export async function getMeK() {
   try {
     const res = await getMe()
     console.log("getMeK", res)
-    if (res.ok) {
-      let userData = await res.json()
+    if (res.status === 200 || res.status === 201) {
+      let userData = await res.data
       console.log("getMeK success", userData)
       return userData
 

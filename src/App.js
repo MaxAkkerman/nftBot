@@ -4,7 +4,7 @@ import React, {useEffect, useState} from "react";
 import {GetMeButton} from "./components/GetMeButton/GetMeButton";
 // import {GetMyNfts} from "./components/GetMyNfts/GetMyNfts";
 import {webSocket} from "./webSocket/webSocket";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import PopperApp from "./components/Popper/Popper";
 import {TitleMenu} from "./components/TitleMenu/TitleMenu";
 import {NftView} from "./components/NftContainer/NftContainer";
@@ -18,6 +18,7 @@ import {reduxStore} from "./lib/redux";
 
 
 function App() {
+  const dispatch = useDispatch();
   const pubkey = useSelector((state) => state.appReducer.pubkey);
   const address = useSelector((state) => state.appReducer.address);
   const user_nfts_array = useSelector((state) => state.appReducer.user_nfts_array);
@@ -29,9 +30,11 @@ function App() {
   async function check() {
     let result = await getMeK()
     if(result){
-      reduxStore.dispatch(result)
+      console.log("resilt",result)
+      dispatch(setAuthUserData(result))
       return true
     }else{
+      console.log("resilt",result)
       return false
     }
   }
@@ -64,16 +67,18 @@ function App() {
 //   }, []);
 
 
-
-  
-  
-  
   useEffect(() => {
     async function onWebSocket() {
       await webSocket()
     }
 
     onWebSocket()
+  }, [])
+  
+  
+  
+  useEffect(() => {
+    check()
   }, [])
 
   // function closePopup(){
