@@ -15,6 +15,7 @@ function App() {
   const address = useSelector((state) => state.appReducer.address);
   const user_nfts_array = useSelector((state) => state.appReducer.user_nfts_array);
   const currentNft = useSelector((state) => state.appReducer.currentNft);
+  const currentTrade = useSelector((state) => state.appReducer.currentTrade);
 
   
   
@@ -48,6 +49,10 @@ function App() {
             currentNft ?
               <NftItemView/>
               :
+              
+              (currentTrade ?
+                  <div>tradeItem</div>
+              :
               <>
                 <PopperApp/>
                 <TitleMenu/>
@@ -56,6 +61,7 @@ function App() {
                   DEV
                 </div>
               </>
+            )
           }
           </>)
           

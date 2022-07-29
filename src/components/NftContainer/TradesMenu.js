@@ -2,7 +2,7 @@ import AddCustomNft from "../AddCutomNft/AddCustomNft";
 import Loader from "../Loader/Loader";
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {requestUserTrades, setCurrentNft} from "../../redux/store/actions/market";
+import {requestUserTrades, setCurrentNft, setCurrentTrade} from "../../redux/store/actions/market";
 import "./tradeMenu.css"
 import {Button} from "@mui/material";
 
@@ -20,9 +20,10 @@ export function TradesMenu() {
     dispatch(requestUserTrades())
   },[])
   
+  
   async function handleClickTrade(e, nft) {
-    // let curF = user_nfts_array.filter(it => +e.currentTarget.id === it.index)
-    // dispatch(setCurrentNft(curF[0]))
+    let curF = user_trades.filter(it => +e.currentTarget.id === it.id)
+    dispatch(setCurrentTrade(curF[0]))
   }
   
   return (
@@ -41,15 +42,9 @@ export function TradesMenu() {
       ) : user_trades_error ? (
           <div
             onClick={() => retryRequest()}
-            className="title"
-            style={{
-              width: "100%",
-              display: "flex",
-              fontSize: "20px",
-              fontWeight: "600",
-            }}
+            className="loader_wrap"
           >
-            <div style={{margin: "auto"}}>
+            <div>
               Oops! Some network problem, please try again.
             </div>
           </div>
@@ -78,14 +73,7 @@ export function TradesMenu() {
             </div>
             :
             <div
-              style={{
-                minHeight: `calc(100vh - 596px)`,
-                display: "flex",
-                color: "white",
-                alignItems: "center",
-                justifyContent: "center"
-              }}
-              className="modal-constructor modal-constructor-market"
+              className="loader_wrap"
             >
               There is nothing here yet...
             </div>

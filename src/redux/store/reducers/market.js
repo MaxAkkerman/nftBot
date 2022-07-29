@@ -10,7 +10,11 @@ import {
   REQUEST_USER_NFT_ITEM_SUCCESS,
   REQUEST_USER_NFT_ITEM_FAILED,
   SET_CURRENT_NFT,
-  DELETE_CURRENT_NFT, REQUEST_USER_TRADES_LOADING, REQUEST_USER_TRADES_SUCCESS, REQUEST_USER_TRADES_FAILED
+  DELETE_CURRENT_NFT,
+  REQUEST_USER_TRADES_LOADING,
+  REQUEST_USER_TRADES_SUCCESS,
+  REQUEST_USER_TRADES_FAILED,
+  DELETE_CURRENT_TRADE, SET_CURRENT_TRADE
 } from "../actions/types";
 
 
@@ -41,16 +45,26 @@ const user_nfts = {
   userNftItemError: null,
 }
 const currentNft = null
+const currentTrade = null
 const initialState = {
   ...websocket,
   ...user_data,
   ...user_nfts,
   currentNft,
+  currentTrade,
   ...user_trades
 };
 
 export default function appReducer(state = initialState, action) {
   switch (action.type) {
+    case DELETE_CURRENT_TRADE:
+      return produce(state, (draft) => {
+        draft.currentTrade = null;
+      });
+    case SET_CURRENT_TRADE:
+      return produce(state, (draft) => {
+        draft.currentTrade = action.payload;
+      });
     case DELETE_CURRENT_NFT:
       return produce(state, (draft) => {
         draft.currentNft = null;

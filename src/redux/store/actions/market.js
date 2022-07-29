@@ -14,7 +14,8 @@ import {
   REQUEST_USER_TRADES,
   REQUEST_USER_TRADES_LOADING,
   REQUEST_USER_TRADES_SUCCESS,
-  REQUEST_USER_TRADES_FAILED
+  REQUEST_USER_TRADES_FAILED,
+  SET_CURRENT_TRADE, DELETE_CURRENT_TRADE
 } from "./types";
 
 export function setWebSocketStatus(status) {
@@ -100,6 +101,20 @@ export function deleteCurrentNft() {
     type: DELETE_CURRENT_NFT,
   };
 }
+export function setCurrentTrade(trade) {
+  console.log("setCurrentTrade",trade)
+  return {
+    type: SET_CURRENT_TRADE,
+    payload:trade
+  };
+}
+export function deleteCurrentTrade() {
+  console.log("deleteCurrentTrade")
+  return {
+    type: DELETE_CURRENT_TRADE,
+  };
+}
+
 
 
 
