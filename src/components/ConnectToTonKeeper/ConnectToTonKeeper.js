@@ -5,10 +5,11 @@ import Loader from "../Loader/Loader.js";
 import {Button} from "@mui/material";
 
 export default function ConnectToTonKeeper() {
-
+  
+  console.log("ConnectToTonKeeper")
   const {handleGetLink, login} = useHandleLogin()
-  const {url,error,loading,status} = login;
 
+  let {loading, error,url,status} = login;
 
   useEffect(()=> {
     async function fetchData(){
@@ -16,16 +17,14 @@ export default function ConnectToTonKeeper() {
     }
     fetchData()
   },[])
-
-
   return (
     <>
 
       <header className="header">
-        <div onClick={()=>console.log(url,error,loading)}>
+        <div>
           Connect wallet
         </div>
-        
+
         {loading
           ?
           <Loader/>
@@ -33,25 +32,25 @@ export default function ConnectToTonKeeper() {
           :
 
           (error ?
-          <div>some error {status}</div>
+            <div>some error {status}</div>
 
-          : (url.length ?
+            : (url.length ?
                 <>
-                <div>
-                <a href={url}>
-                  {url}</a>
-                </div>
-                <Button
-                  id="nav-connect-wallet"
-                  // className="btn wallet-btn"
-                  variant={"outlined"}
+                  <div>
+                    <a href={url}>
+                      {url}</a>
+                  </div>
+                  <Button
+                    id="nav-connect-wallet"
+                    // className="btn wallet-btn"
+                    variant={"outlined"}
 
-                >
-                  <a href={url}>TonKeeper</a>
-                </Button>
+                  >
+                    <a href={url}>TonKeeper</a>
+                  </Button>
                 </>
-          : null
-          ))
+                : null
+            ))
         }
 
 

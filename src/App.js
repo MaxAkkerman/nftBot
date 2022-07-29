@@ -9,13 +9,11 @@ import PopperApp from "./components/Popper/Popper";
 import {TitleMenu} from "./components/TitleMenu/TitleMenu";
 import {NftView} from "./components/NftContainer/NftContainer";
 import {NftItemView} from "./components/NftItemView/NftItemView";
-import {getMe} from "./network/requests";
-import {setAuthUserData} from "./redux/store/actions/market";
-import {getMeK} from "./utils/utils";
-import {reduxStore} from "./lib/redux";
-
-
-
+import useHandleLogin from "./hooks/useSelectPopup";
+// import {getMe} from "./network/requests";
+// import {setAuthUserData} from "./redux/store/actions/market";
+// import {getMeK} from "./utils/utils";
+// import {reduxStore} from "./lib/redux";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,20 +23,20 @@ function App() {
   const currentNft = useSelector((state) => state.appReducer.currentNft);
   const currentTrade = useSelector((state) => state.appReducer.currentTrade);
 
-  const [currentCount, setCount] = useState(false);
+  // const [currentCount, setCount] = useState(false);
+  //
+  // async function check() {
+  //   let result = await getMeK()
+  //   if(result){
+  //     console.log("resilt",result)
+  //     dispatch(setAuthUserData(result))
+  //     return true
+  //   }else{
+  //     console.log("resilt",result)
+  //     return false
+  //   }
+  // }
 
-  async function check() {
-    let result = await getMeK()
-    if(result){
-      console.log("resilt",result)
-      dispatch(setAuthUserData(result))
-      return true
-    }else{
-      console.log("resilt",result)
-      return false
-    }
-  }
-  
   // useEffect(() => {
   //   if (currentCount) {
   //     return;
@@ -57,29 +55,30 @@ function App() {
   // };
   //
   // console.log(currentCount);
-  
-  
-  
-  
+
+
 //   setInterval(check, 2000);
 //   useEffect(() => {
 //     check()
 //   }, []);
 
+  // const {handleGetLink, login} = useHandleLogin()
+  //
+  //
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     await handleGetLink()
+  //   }
+  //
+  //   fetchData().then(res=>console.log("fetchData", res))
+  //
+  //  
+  // }, [])
 
-  useEffect(() => {
-    async function onWebSocket() {
-      await webSocket()
-    }
 
-    onWebSocket()
-  }, [])
-  
-  
-  
-  useEffect(() => {
-    check()
-  }, [])
+  // useEffect(() => {
+  //   check()
+  // }, [])
 
   // function closePopup(){
   //   console.log("closePopup")
@@ -111,10 +110,11 @@ function App() {
                 )
             }
           </>)
-
-
         :
-        <ConnectToTonKeeper/>
+        <ConnectToTonKeeper
+          // handleGetLink={() => handleGetLink()}
+          // login={login}
+        />
       }
 
       {/*<GetMeButton/>*/}
