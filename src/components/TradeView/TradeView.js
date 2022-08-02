@@ -66,8 +66,9 @@ export function TradeView() {
   async function cancelSale() {
     let res = await cancelSaleRequest(CT.id)
     if (res.status === 200 || res.status === 201) {
-      let json = await res.data
-      console.log("closeSaleRequest", json)
+      let url = await res.data
+      window.open(url, '_blank')
+
     }
   }
 
@@ -103,7 +104,7 @@ export function TradeView() {
             NFT Name: {curNftByTrade.name}
           </div>
           <div>
-            Trade ID: {CT.id}
+            Trade ID: {CT.searchId}
           </div>
           <div>
             Collection: {curNftByTrade.collectionName}

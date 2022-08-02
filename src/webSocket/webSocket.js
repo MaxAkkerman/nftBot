@@ -1,6 +1,6 @@
 import {baseUrl} from "../network/constants";
 import { reduxStore } from '../lib/redux';
-import {setAuthUserData, setWebSocketStatus} from "../redux/store/actions/market";
+import {setAuthUserData, setWebSocketStatus, tradeUpdate} from "../redux/store/actions/market";
 
 const { io } = require("socket.io-client");
 
@@ -32,15 +32,19 @@ export async function webSocket(){
   });
   socket.on('trade-update', function(data) {
     console.log('trade-update', data);
-    let json = JSON.stringify([data])
-    let trades = JSON.parse(localStorage.getItem("trades"))
-    if(!trades){
-      localStorage.setItem("trades", json)
-    }else{
-      trades.push(data);
-      let json = JSON.stringify([data])
-      localStorage.setItem("trades", json)
-    }
+
+    reduxStore.dispatch(
+      tradeUpdate(data),
+    );
+    // let json = JSON.stringify([data])
+    // let trades = JSON.parse(localStorage.getItem("trades"))
+    // if(!trades){
+    //   localStorage.setItem("trades", json)
+    // }else{
+    //   trades.push(data);
+    //   let json = JSON.stringify([data])
+    //   localStorage.setItem("trades", json)
+    // }
     
    
   });

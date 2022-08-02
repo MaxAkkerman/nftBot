@@ -74,7 +74,7 @@ export function NftsMainMenu() {
             <div className={"user_nfts_container"}>
               {myArr.length && myArr.map(item => {
                 return <div className={"nft_item_wrapper"} id={item.index}
-                            onClick={(e, item) => handleClickNft(e, item)} key={item.i}>
+                            onClick={(e, item) => handleClickNft(e, item)} key={item.address}>
                   <div className={"nft_item_img_wrap"}>
                     <img src={item.image} alt={"img"}/>
                   </div>

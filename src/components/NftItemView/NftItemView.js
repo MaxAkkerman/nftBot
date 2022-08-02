@@ -31,8 +31,8 @@ export function NftItemView() {
     try {
       let res = await openSaleRequest(address, sellPrice)
       if (res.status === 200 || res.status === 201) {
-        let json = await res.data
-        console.log("openSalejson", json)
+        let url = await res.data
+        window.open(url, '_blank')
       }
 
     } catch (e) {

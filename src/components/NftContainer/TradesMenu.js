@@ -23,6 +23,7 @@ export function TradesMenu() {
   const user_trades = useSelector((state) => state.appReducer.user_trades);
   const user_trades_loading = useSelector((state) => state.appReducer.user_trades_loading);
   const user_trades_error = useSelector((state) => state.appReducer.user_trades_error);
+  const address = useSelector((state) => state.appReducer.address);
 
   function retryRequest() {
 
@@ -68,7 +69,7 @@ export function TradesMenu() {
         :
         ((user_trades && user_trades.length > 0) ?
             <div className={"user_trades_container"}>
-              {[...user_trades].filter(item=>item.status==="OPEN").map(item => {
+              {[...user_trades].filter(item=>item.sellerAddress === address).map(item => {
                 return <Button disabled={tradeStatus.includes(item.status)} variant={"outlined"} style={{fontSize:"7px",marginTop:"5px",display:"flex", justifyContent:"space-evenly"}} className={"trade_item_wrapper"} id={item.id}
                             onClick={(e, item) => handleClickTrade(e, item)} key={item.i}>
                   {/*<div className={"nft_item_img_wrap"}>*/}

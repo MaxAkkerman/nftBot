@@ -18,7 +18,7 @@ import {
   SEARCH_NFT_ITEM_FAILED,
   SEARCH_NFT_ITEM_SUCCESS,
   SEARCH_TRADE_ITEM_SUCCESS,
-  SEARCH_TRADE_ITEM_FAILED
+  SEARCH_TRADE_ITEM_FAILED, TRADE_UPDATE
 } from "../actions/types";
 
 
@@ -73,7 +73,12 @@ export default function appReducer(state = initialState, action) {
       return produce(state, (draft) => {
         draft.searchNftItemE = action.payload;
       });
-
+    case TRADE_UPDATE:
+      return produce(state, (draft) => {
+        let arrCopy = [...draft.user_trades]
+        // arrCopy.filter(fr=>fr.tradeID)
+        // draft.user_trades = action.payload;
+      });
     case SEARCH_TRADE_ITEM_SUCCESS:
       return produce(state, (draft) => {
         draft.user_trades = [...draft.user_trades,action.payload];

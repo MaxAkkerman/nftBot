@@ -17,8 +17,7 @@ import {
   REQUEST_USER_TRADES_FAILED,
   SET_CURRENT_TRADE,
   DELETE_CURRENT_TRADE,
-  SEARCH_NFT_ITEM,
-  SEARCH_TRADE_ITEM,
+  TRADE_UPDATE,
   SEARCH_NFT_ITEM_FAILED,
   SEARCH_TRADE_ITEM_REQUEST,
   SEARCH_NFT_ITEM_SUCCESS,
@@ -34,7 +33,13 @@ console.log("setWebSocketStatus",status)
     payload:status
   };
 }
-
+export function tradeUpdate(tradeUpdated) {
+  console.log("tradeUpdate",tradeUpdated)
+  return {
+    type: TRADE_UPDATE,
+    payload:tradeUpdated
+  };
+}
 export function setAuthUserData(user_data) {
   console.log("setAuthUserData",user_data)
   return {
