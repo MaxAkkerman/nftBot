@@ -88,7 +88,7 @@ function App() {
   return (
 
     <div className="App">
-      {!address ?
+      {address ?
         (
           <>
             {
