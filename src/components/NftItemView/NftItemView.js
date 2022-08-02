@@ -10,6 +10,7 @@ import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import Paper from "@mui/material/Paper";
+import mockIcon2 from "../../images/title.png"
 
 export function NftItemView() {
   const dispatch = useDispatch();
@@ -22,16 +23,18 @@ export function NftItemView() {
   //   sellerAddress: null,
   //   nftPrice: null
   // })
-  const [sellPrice,setSellPrice] = useState(0)
-  
+  const [sellPrice, setSellPrice] = useState(null)
+
   async function openSale() {
     console.log("openSale", currentNft)
     let address = currentNft.address
     try {
       let res = await openSaleRequest(address, sellPrice)
+      if (res.status === 200 || res.status === 201) {
+        let json = await res.data
+        console.log("openSalejson", json)
+      }
 
-      let json = await res.json()
-      console.log("openSalejson", json)
     } catch (e) {
       console.log("openSalejson error", e)
     }
@@ -73,47 +76,59 @@ export function NftItemView() {
   }
 
   return (
-    <div className={"nft_item_container"}>
-      <div className={"nft_item_head_wrap"}>
+    <div className={"trade_item_container"}>
+      <div className={"trade_item_data_wrap"}>
         <div onClick={() => dispatch(deleteCurrentNft())}>
           <CloseIcon/>
           {/*<img src={CloseIcon} alt={"close"}/>*/}
         </div>
         <div className={"nft_title"}>
-          User Item
+          User NFT
         </div>
       </div>
 
-      <div className={"nft_item_wrapper"} key={currentNft.index}>
-        <div className={"nft_item_img_wrap"}>
-          <img src={currentNft.image} alt={"img"}/>
+      <div className={"trade_item_wrap"} key={currentNft.index}>
+        <div className={"trade_item_img_wrap"}>
+          <img src={mockIcon2} alt={"img"}/>
         </div>
-        <div>
-          Name: {currentNft.name}
-        </div>
-        <div>
-          C
-        </div>
-        <div>
-          Address: {currentNft.address}
+        <div className={"trade_item_text_wrap"}>
+          <div>
+            {currentNft.name}
+          </div>
+          <div>
+            {currentNft.collectionName}
+          </div>
+          <div>
+            Address: {currentNft.address}
+          </div>
+         
         </div>
         <div className={"set_price_input_wrap"}>
-        <Paper
-          component="form"
-          sx={{ p: '1px 2px', display: 'flex', alignItems: 'center', width: 400, background:"transparent",border: "1px solid rgba(25, 118, 210, 0.5)", color: "#1976d2" }}
-          variant={"outlined"}
-        >
-          <InputBase
-            sx={{ ml: 1, flex: 1, color:"#1976d2",opacity:"1" }}
-            placeholder="Set your price"
-            inputProps={{ 'aria-label': 'OutlinedInput' }}
+          <Paper
+            component="form"
+            sx={{
+              p: '1px 2px',
+              display: 'flex',
+              alignItems: 'center',
+              width: 400,
+              background: "transparent",
+              border: "1px solid rgba(25, 118, 210, 0.5)",
+              color: "#1976d2"
+            }}
             variant={"outlined"}
-            value={sellPrice}
-            onChange={(e)=>setSellPrice(+e.currentTarget.value)}
-          />
-        </Paper>
+          >
+            <InputBase
+              sx={{ml: 1, flex: 1, color: "#1976d2", opacity: "1"}}
+              placeholder="Set your price"
+              inputProps={{'aria-label': 'OutlinedInput'}}
+              variant={"outlined"}
+              value={sellPrice}
+              onChange={(e) => setSellPrice(+e.currentTarget.value)}
+            />
+          </Paper>
         </div>
-          <Button variant="outlined" sx={{fontSize: "10px",width:"100%"}} onClick={() => openSale()}>Open sale</Button>
+        <Button variant="outlined" sx={{fontSize: "10px", width: "100%", marginTop: "10px"}} onClick={() => openSale()}>Open
+          sale</Button>
       </div>
     </div>
   )

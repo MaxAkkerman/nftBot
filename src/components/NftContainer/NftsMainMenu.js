@@ -1,9 +1,9 @@
 import AddCustomNft from "../AddCutomNft/AddCustomNft";
 import Loader from "../Loader/Loader";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {setCurrentNft} from "../../redux/store/actions/market";
-import {closeSaleRequest, getTrades, openSaleRequest} from "../../network/requests";
+import {searchNftRequest, setCurrentNft} from "../../redux/store/actions/market";
+import {closeSaleRequest, getByNftAddress, getTrades, openSaleRequest} from "../../network/requests";
 import {Button} from "@mui/material";
 
 
@@ -22,12 +22,30 @@ export function NftsMainMenu() {
     dispatch(setCurrentNft(curF[0]))
   }
   
+  const [myArr,setMyArr] = useState([])
+ 
+  useEffect(()=>{
+    const uniqueIds = [];
+    const unique = user_nfts_array.filter(element => {
+      const isDuplicate = uniqueIds.includes(element.address);
+      if (!isDuplicate) {
+        uniqueIds.push(element.address);
+        return true;
+      }
+      return false;
+    });
+    setMyArr(unique)
+    },[user_nfts_array])
+ 
+ 
   return (
-
-
-    <>
+   <>
       <div className={"nft_custom_search_container"}>
-        <AddCustomNft/>
+        <AddCustomNft
+        type={"NFT"}
+        handleRequest={(address)=>dispatch(searchNftRequest(address))}
+        
+        />
       </div>
       {userNftItemLoading ? (
         <div
@@ -52,9 +70,9 @@ export function NftsMainMenu() {
           </div>
         )
         :
-        ((user_nfts_array && user_nfts_array.length > 0) ?
+        ((myArr && myArr.length > 0) ?
             <div className={"user_nfts_container"}>
-              {user_nfts_array.length && user_nfts_array.map(item => {
+              {myArr.length && myArr.map(item => {
                 return <div className={"nft_item_wrapper"} id={item.index}
                             onClick={(e, item) => handleClickNft(e, item)} key={item.i}>
                   <div className={"nft_item_img_wrap"}>

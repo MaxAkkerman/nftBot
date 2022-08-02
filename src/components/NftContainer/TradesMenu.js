@@ -2,9 +2,21 @@ import AddCustomNft from "../AddCutomNft/AddCustomNft";
 import Loader from "../Loader/Loader";
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {requestUserTrades, setCurrentNft, setCurrentTrade} from "../../redux/store/actions/market";
+import {
+  requestUserTrades,
+  searchNftRequest,
+  searchTradeRequest,
+  setCurrentNft,
+  setCurrentTrade
+} from "../../redux/store/actions/market";
 import "./tradeMenu.css"
 import {Button} from "@mui/material";
+
+const tradeStatus = [
+  "INITIALIZED",
+  "CANCELED",
+  "SUCCESS",
+  "FAILED"]
 
 export function TradesMenu() {
   const dispatch = useDispatch();
@@ -22,16 +34,20 @@ export function TradesMenu() {
   
   
   async function handleClickTrade(e, nft) {
-    let curF = user_trades.filter(it => +e.currentTarget.id === it.id)
+    let curF = user_trades.filter(it => e.currentTarget.id === it.id)
+    console.log("tradecer", e.currentTarget.id,curF)
     dispatch(setCurrentTrade(curF[0]))
   }
-  
+
   return (
 
 
     <>
       <div className={"nft_custom_search_container"}>
-        <AddCustomNft/>
+        <AddCustomNft
+          type={"Trade"}
+          handleRequest={(tradeID)=>dispatch(searchTradeRequest(tradeID))}
+        />
       </div>
       {user_trades_loading ? (
         <div
@@ -52,20 +68,20 @@ export function TradesMenu() {
         :
         ((user_trades && user_trades.length > 0) ?
             <div className={"user_trades_container"}>
-              {user_trades.map(item => {
-                return <Button variant={"outlined"} style={{fontSize:"7px",marginTop:"5px"}} className={"trade_item_wrapper"} id={item.id}
+              {[...user_trades].filter(item=>item.status==="OPEN").map(item => {
+                return <Button disabled={tradeStatus.includes(item.status)} variant={"outlined"} style={{fontSize:"7px",marginTop:"5px",display:"flex", justifyContent:"space-evenly"}} className={"trade_item_wrapper"} id={item.id}
                             onClick={(e, item) => handleClickTrade(e, item)} key={item.i}>
                   {/*<div className={"nft_item_img_wrap"}>*/}
                   {/*  <img src={item.image} alt={"img"}/>*/}
                   {/*</div>*/}
                   <div>
-                    nftPrice: {item.nftPrice}
+                    Trade ID: {item.id}
                   </div>
                   <div>
-                    searchId: {item.searchId}
+                    Price: {item.nftPrice} ton
                   </div>
                   <div>
-                    sellerAddress: {item.sellerAddress}
+                    Status: {item.status}
                   </div>
                 </Button>
               })

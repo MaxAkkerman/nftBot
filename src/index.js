@@ -7,13 +7,13 @@ import {getLoginToken} from "./network/requests";
 import {webSocket} from "./webSocket/webSocket";
 
 async function test(){
-  const res = await getLoginToken()
+  const res = await getLoginToken().then(async()=>await onWebSocket())
   console.log("in index ",res)
   async function onWebSocket() {
     await webSocket()
   }
 
-  onWebSocket().then(res=>console.log("onWebSocket", res))
+  // onWebSocket().then(res=>console.log("onWebSocket", res))
 }
 test()
 const root = ReactDOM.createRoot(document.getElementById('root'));

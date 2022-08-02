@@ -14,7 +14,11 @@ import {
   REQUEST_USER_TRADES_LOADING,
   REQUEST_USER_TRADES_SUCCESS,
   REQUEST_USER_TRADES_FAILED,
-  DELETE_CURRENT_TRADE, SET_CURRENT_TRADE
+  DELETE_CURRENT_TRADE, SET_CURRENT_TRADE,
+  SEARCH_NFT_ITEM_FAILED,
+  SEARCH_NFT_ITEM_SUCCESS,
+  SEARCH_TRADE_ITEM_SUCCESS,
+  SEARCH_TRADE_ITEM_FAILED
 } from "../actions/types";
 
 
@@ -44,6 +48,9 @@ const user_nfts = {
   userNftItemLoading:false,
   userNftItemError: null,
 }
+const searchNftItemE = null
+const searchTradeItemE = null
+
 const currentNft = null
 const currentTrade = null
 const initialState = {
@@ -57,6 +64,27 @@ const initialState = {
 
 export default function appReducer(state = initialState, action) {
   switch (action.type) {
+    case SEARCH_NFT_ITEM_SUCCESS:
+      console.log("action.payload",action)
+      return produce(state, (draft) => {
+        draft.user_nfts_array = [...draft.user_nfts_array,action.payload];
+      });
+    case SEARCH_NFT_ITEM_FAILED:
+      return produce(state, (draft) => {
+        draft.searchNftItemE = action.payload;
+      });
+
+    case SEARCH_TRADE_ITEM_SUCCESS:
+      return produce(state, (draft) => {
+        draft.user_trades = [...draft.user_trades,action.payload];
+      });
+    case SEARCH_TRADE_ITEM_FAILED:
+      return produce(state, (draft) => {
+        draft.searchTradeItemE = action.payload;
+      });
+      
+      
+      
     case DELETE_CURRENT_TRADE:
       return produce(state, (draft) => {
         draft.currentTrade = null;

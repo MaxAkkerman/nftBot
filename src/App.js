@@ -10,11 +10,11 @@ import {TitleMenu} from "./components/TitleMenu/TitleMenu";
 import {NftView} from "./components/NftContainer/NftContainer";
 import {NftItemView} from "./components/NftItemView/NftItemView";
 import useHandleLogin from "./hooks/useSelectPopup";
+import {TradeView} from "./components/TradeView/TradeView";
 // import {getMe} from "./network/requests";
 // import {setAuthUserData} from "./redux/store/actions/market";
 // import {getMeK} from "./utils/utils";
 // import {reduxStore} from "./lib/redux";
-
 function App() {
   const dispatch = useDispatch();
   const pubkey = useSelector((state) => state.appReducer.pubkey);
@@ -88,7 +88,7 @@ function App() {
   return (
 
     <div className="App">
-      {address ?
+      {!address ?
         (
           <>
             {
@@ -97,15 +97,12 @@ function App() {
                 :
 
                 (currentTrade ?
-                    <div>tradeItem</div>
+                    <TradeView/>
                     :
                     <>
                       <PopperApp/>
                       <TitleMenu/>
                       <NftView/>
-                      <div style={{marginTop: "200px", borderTop: "2px solid black"}}>
-                        DEV
-                      </div>
                     </>
                 )
             }

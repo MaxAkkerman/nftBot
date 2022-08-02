@@ -15,7 +15,16 @@ import {
   REQUEST_USER_TRADES_LOADING,
   REQUEST_USER_TRADES_SUCCESS,
   REQUEST_USER_TRADES_FAILED,
-  SET_CURRENT_TRADE, DELETE_CURRENT_TRADE
+  SET_CURRENT_TRADE,
+  DELETE_CURRENT_TRADE,
+  SEARCH_NFT_ITEM,
+  SEARCH_TRADE_ITEM,
+  SEARCH_NFT_ITEM_FAILED,
+  SEARCH_TRADE_ITEM_REQUEST,
+  SEARCH_NFT_ITEM_SUCCESS,
+  SEARCH_NFT_ITEM_REQUEST,
+  SEARCH_TRADE_ITEM_SUCCESS,
+  SEARCH_TRADE_ITEM_FAILED
 } from "./types";
 
 export function setWebSocketStatus(status) {
@@ -115,6 +124,48 @@ export function deleteCurrentTrade() {
   };
 }
 
+export function searchNftRequest(address) {
+  console.log("searchNft",address)
+  return {
+    type: SEARCH_NFT_ITEM_REQUEST,
+    address
+  };
+}
+export function searchNftSuccess(data) {
+  console.log("searchNft",data)
+  return {
+    type: SEARCH_NFT_ITEM_SUCCESS,
+    payload:data
+  };
+}
+export function searchNftFailed(e) {
+  console.log("searchNftFailed")
+  return {
+    type: SEARCH_NFT_ITEM_FAILED,
+    payload:e
+  };
+}
+export function searchTradeRequest(traidID) {
+  console.log("searchTrade")
+  return {
+    type: SEARCH_TRADE_ITEM_REQUEST,
+    traidID
+  };
+}
+export function searchTradeSuccess(data) {
+  console.log("searchNft")
+  return {
+    type: SEARCH_TRADE_ITEM_SUCCESS,
+    payload:data
+  };
+}
+export function searchTradeFailed(e) {
+  console.log("searchNft")
+  return {
+    type: SEARCH_TRADE_ITEM_FAILED,
+    payload:e
+  };
+}
 
 
 

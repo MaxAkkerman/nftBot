@@ -10,22 +10,10 @@ import {TradesMenu} from "./TradesMenu";
 import {NftsMainMenu} from "./NftsMainMenu";
 
 export function NftView() {
-
-
-  async function byeNft() {
-    try {
-      let res = await closeSaleRequest("886583")
-
-      let json = await res.json()
-      console.log("closeSaleRequest", json)
-    } catch (e) {
-      console.log("closeSaleRequest error", e)
-    }
-  }
-
   const [showIt, setShowIt] = useState(false)
 
   async function handleShowTrades() {
+    
     setShowIt(false)
 
   }

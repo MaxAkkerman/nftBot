@@ -23,8 +23,8 @@ export async function getByNftAddress(nftAddress){
 export async function getTrades(){
   return await axios.get(`${baseUrl}/api/trades/get-by-participant-address`, {withCredentials:true})
 }
-export async function getNFtbySearchId(searchId){
-  return await axios.get(`${baseUrl}/api/trades/get-by-search-id/${searchId}`, {withCredentials:true})
+export async function getTradebyTradeID(tradeId){
+  return await axios.get(`${baseUrl}/api/trades/get-by-search-id/${tradeId}`, {withCredentials:true})
 }
 export async function getByTradeId(tradeId){
   return await axios.get(`${baseUrl}/api/trades/${tradeId}`, {withCredentials:true})
