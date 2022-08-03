@@ -14,9 +14,16 @@ function* asyncSearchTradeItem(params) {
   console.log("asyncSearchTradeItem",params)
 	// yield put(getUserDataLoadingAction());
 	try {
-		const trade = yield call(searchTradeBySid, params.traidID);
-    console.log("getTradebyTradeID", trade)
-		yield put(searchTradeSuccess(trade));
+		const trade = yield call(searchTradeBySid, params.payload);
+    console.log("getTradebyTradeID", params.payload.address,trade)
+    if(params.payload.address === trade.sellerAddress){
+      console.log("Same trade")
+
+      throw {e:"Same trade"}
+    }else{
+      yield put(searchTradeSuccess(trade));
+    }
+
 	} catch (e) {
     console.log("thise",e)
 		yield put(searchTradeFailed(e));

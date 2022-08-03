@@ -12,6 +12,7 @@ export function NftsMainMenu() {
   const user_nfts_array = useSelector((state) => state.appReducer.user_nfts_array);
   const userNftItemLoading = useSelector((state) => state.appReducer.userNftItemLoading);
   const userNftItemError = useSelector((state) => state.appReducer.userNftItemError);
+  const address = useSelector((state) => state.appReducer.address);
 
   function retryRequest() {
 
@@ -72,7 +73,7 @@ export function NftsMainMenu() {
         :
         ((myArr && myArr.length > 0) ?
             <div className={"user_nfts_container"}>
-              {myArr.length && myArr.map(item => {
+              {myArr.length && myArr.filter(fr=>fr.address === address).map(item => {
                 return <div className={"nft_item_wrapper"} id={item.index}
                             onClick={(e, item) => handleClickNft(e, item)} key={item.address}>
                   <div className={"nft_item_img_wrap"}>

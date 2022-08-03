@@ -11,3 +11,7 @@
 .popper_img{
   height:100%;
 }
+.popperLogout{
+  inset: 15px auto auto -24px; 
+  left:10px
+}

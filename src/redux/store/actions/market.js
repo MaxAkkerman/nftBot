@@ -23,7 +23,7 @@ import {
   SEARCH_NFT_ITEM_SUCCESS,
   SEARCH_NFT_ITEM_REQUEST,
   SEARCH_TRADE_ITEM_SUCCESS,
-  SEARCH_TRADE_ITEM_FAILED
+  SEARCH_TRADE_ITEM_FAILED, ADD_USER_TRADE_BY_SEARCH, DELETE_NFT_FROM_ARR
 } from "./types";
 
 export function setWebSocketStatus(status) {
@@ -74,7 +74,13 @@ export function getUserDataFailedAction(e) {
 }
 
 
-
+export function deleteNftFromArr(id) {
+  console.log("deleteNftFromArr",id)
+  return {
+    type: DELETE_NFT_FROM_ARR,
+    payload:id
+  };
+}
 export function requestUserNftItem(params) {
   console.log("requestUserDataAction",params)
   return {
@@ -128,7 +134,13 @@ export function deleteCurrentTrade() {
     type: DELETE_CURRENT_TRADE,
   };
 }
-
+export function addTradeBySearch(data) {
+  console.log("addTradeBySearch",data)
+  return {
+    type: ADD_USER_TRADE_BY_SEARCH,
+    payload:data
+  };
+}
 export function searchNftRequest(address) {
   console.log("searchNft",address)
   return {
@@ -150,15 +162,15 @@ export function searchNftFailed(e) {
     payload:e
   };
 }
-export function searchTradeRequest(traidID) {
+export function searchTradeRequest(traidID,address) {
   console.log("searchTrade")
   return {
     type: SEARCH_TRADE_ITEM_REQUEST,
-    traidID
+    payload:{traidID,address}
   };
 }
 export function searchTradeSuccess(data) {
-  console.log("searchNft")
+  console.log("searchTradeSuccess",data)
   return {
     type: SEARCH_TRADE_ITEM_SUCCESS,
     payload:data

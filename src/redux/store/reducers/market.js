@@ -18,7 +18,7 @@ import {
   SEARCH_NFT_ITEM_FAILED,
   SEARCH_NFT_ITEM_SUCCESS,
   SEARCH_TRADE_ITEM_SUCCESS,
-  SEARCH_TRADE_ITEM_FAILED, TRADE_UPDATE
+  SEARCH_TRADE_ITEM_FAILED, TRADE_UPDATE, ADD_USER_TRADE_BY_SEARCH, DELETE_NFT_FROM_ARR
 } from "../actions/types";
 
 
@@ -48,6 +48,9 @@ const user_nfts = {
   userNftItemLoading:false,
   userNftItemError: null,
 }
+
+const user_trades_added = null
+
 const searchNftItemE = null
 const searchTradeItemE = null
 
@@ -59,11 +62,25 @@ const initialState = {
   ...user_nfts,
   currentNft,
   currentTrade,
-  ...user_trades
+  ...user_trades,
+  user_trades_added
 };
 
 export default function appReducer(state = initialState, action) {
   switch (action.type) {
+    case DELETE_NFT_FROM_ARR:
+      console.log("action.payload",action)
+      return produce(state, (draft) => {
+        let newArr = [...draft.user_nfts_array]
+        let filteredArr = newArr.filter(fr=>fr.address !== action.payload)
+        console.log("newArr",filteredArr)
+        draft.user_nfts_array = [...filteredArr];
+      });
+    case ADD_USER_TRADE_BY_SEARCH:
+      console.log("action.payload",action)
+      return produce(state, (draft) => {
+        draft.user_trades_added = [...draft.user_trades_added,action.payload];
+      });
     case SEARCH_NFT_ITEM_SUCCESS:
       console.log("action.payload",action)
       return produce(state, (draft) => {
@@ -76,12 +93,16 @@ export default function appReducer(state = initialState, action) {
     case TRADE_UPDATE:
       return produce(state, (draft) => {
         let arrCopy = [...draft.user_trades]
-        // arrCopy.filter(fr=>fr.tradeID)
-        // draft.user_trades = action.payload;
+        arrCopy.map(n => n.id === action.payload.id ? action.payload : n)
+        draft.user_trades = arrCopy;
       });
     case SEARCH_TRADE_ITEM_SUCCESS:
       return produce(state, (draft) => {
-        draft.user_trades = [...draft.user_trades,action.payload];
+        console.log("draft.user_trades_added",draft.user_trades_added)
+        draft.user_trades_added === null ?
+          draft.user_trades_added = [action.payload]
+        :
+        draft.user_trades_added = [...draft.user_trades_added,action.payload];
       });
     case SEARCH_TRADE_ITEM_FAILED:
       return produce(state, (draft) => {

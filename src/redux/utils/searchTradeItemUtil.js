@@ -1,9 +1,9 @@
 import {getTradebyTradeID} from "../../network/requests";
 
-export default async function searchTradeBySid({tradeId}) {
-  console.log("tradeIDHERE",tradeId)
+export default async function searchTradeBySid({traidID}) {
+  console.log("tradeIDHERE",traidID.tradeId)
   try {
-    const res = await getTradebyTradeID(tradeId)
+    const res = await getTradebyTradeID(traidID.tradeId)
     console.log("getNFtbySearchId", res)
     if (res.status === 200 || res.status === 201) {
       let trade = await res.data;

@@ -1,6 +1,7 @@
 import {baseUrl} from "../network/constants";
 import { reduxStore } from '../lib/redux';
 import {setAuthUserData, setWebSocketStatus, tradeUpdate} from "../redux/store/actions/market";
+// import {getLoginToken} from "../network/requests";
 
 const { io } = require("socket.io-client");
 
@@ -8,16 +9,14 @@ export async function webSocket(){
   const socket = io(`${baseUrl}`,{
     withCredentials: true,
   });
-  socket.on('connect', function() {
+  socket.on('connect', async function() {
     console.log('Connected');
     reduxStore.dispatch(
       setWebSocketStatus(true),
     );
-    socket.emit('events', { test: 'test' });
-    socket.emit('identity', 0, response =>
-      console.log('Identity:', response),
-    );
+    // await getLoginToken()
   });
+
   socket.on('auth', function(data) {
     console.log('auth', data);
     reduxStore.dispatch(

@@ -13,10 +13,24 @@ import "./tradeMenu.css"
 import {Button} from "@mui/material";
 
 const tradeStatus = [
-  "INITIALIZED",
   "CANCELED",
+  "BOOKED",
   "SUCCESS",
   "FAILED"]
+const tradeStatusCompare = [
+  "OPEN",
+]
+const tradeStatusCompareSuc = [
+  "SUCCESS",
+]
+function compareFunc(a,b){
+  if(tradeStatusCompare.includes(a.status)){
+    return -1
+  }
+  if(tradeStatusCompareSuc.includes(a.status)){
+    return -1
+  }
+}
 
 export function TradesMenu() {
   const dispatch = useDispatch();
@@ -24,6 +38,7 @@ export function TradesMenu() {
   const user_trades_loading = useSelector((state) => state.appReducer.user_trades_loading);
   const user_trades_error = useSelector((state) => state.appReducer.user_trades_error);
   const address = useSelector((state) => state.appReducer.address);
+  const user_trades_added = useSelector((state) => state.appReducer.user_trades_added);
 
   function retryRequest() {
 
@@ -39,7 +54,7 @@ export function TradesMenu() {
     console.log("tradecer", e.currentTarget.id,curF)
     dispatch(setCurrentTrade(curF[0]))
   }
-
+  
   return (
 
 
@@ -47,9 +62,37 @@ export function TradesMenu() {
       <div className={"nft_custom_search_container"}>
         <AddCustomNft
           type={"Trade"}
-          handleRequest={(tradeID)=>dispatch(searchTradeRequest(tradeID))}
+          handleRequest={(tradeID)=>dispatch(searchTradeRequest(tradeID,address))}
         />
       </div>
+      {user_trades_added && <>
+        <div className={"trades_title"}>
+          Buy
+        </div>
+        <div className={"user_trades_container"}>
+          {[...user_trades_added].map(item => {
+            return <Button disabled={tradeStatus.includes(item.status)} variant={"outlined"}
+                           style={{fontSize: "7px", marginTop: "5px", display: "flex", justifyContent: "space-evenly"}}
+                           className={"trade_item_wrapper"} id={item.id}
+                           onClick={(e, item) => handleClickTrade(e, item)} key={item.i}>
+              {/*<div className={"nft_item_img_wrap"}>*/}
+              {/*  <img src={item.image} alt={"img"}/>*/}
+              {/*</div>*/}
+              <div>
+                Trade ID: {item.id}
+              </div>
+              <div>
+                Price: {item.nftPrice} ton
+              </div>
+              <div>
+                Status: {item.status}
+              </div>
+            </Button>
+          })
+          }
+        </div>
+      </>
+      }
       {user_trades_loading ? (
         <div
           className="loader_wrap"
@@ -68,8 +111,12 @@ export function TradesMenu() {
         )
         :
         ((user_trades && user_trades.length > 0) ?
+          <>
+          <div className={"trades_title"}>
+            Sales
+          </div>
             <div className={"user_trades_container"}>
-              {[...user_trades].filter(item=>item.sellerAddress === address).map(item => {
+              {[...user_trades].filter(item=>item.sellerAddress === address).sort((a,b)=>compareFunc(a,b)).map(item => {
                 return <Button disabled={tradeStatus.includes(item.status)} variant={"outlined"} style={{fontSize:"7px",marginTop:"5px",display:"flex", justifyContent:"space-evenly"}} className={"trade_item_wrapper"} id={item.id}
                             onClick={(e, item) => handleClickTrade(e, item)} key={item.i}>
                   {/*<div className={"nft_item_img_wrap"}>*/}
@@ -88,6 +135,7 @@ export function TradesMenu() {
               })
               }
             </div>
+          </>
             :
             <div
               className="loader_wrap"
@@ -96,6 +144,10 @@ export function TradesMenu() {
             </div>
         )
       }
+
+      
+      
+      
     </>
 
   )

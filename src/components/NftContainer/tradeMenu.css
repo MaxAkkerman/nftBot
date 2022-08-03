@@ -1,7 +1,7 @@
 .user_trades_container{
   display: flex;
   flex-direction: column;
-  margin-top:20px;
+  margin-top:2px;
 }
 .trade_item_wrapper{
   height: 40px;
@@ -19,4 +19,7 @@
   display: flex;
   justify-content: center;
   margin-top: 20px;
+}
+.trades_title{
+  margin-top:15px;
 }
