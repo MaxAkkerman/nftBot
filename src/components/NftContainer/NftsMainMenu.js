@@ -118,8 +118,9 @@ export function NftsMainMenu() {
             :
             <div
               style={{
-                minHeight: `calc(100vh - 596px)`,
+                // minHeight: `calc(100vh - 596px)`,
                 display: "flex",
+                marginTop:"40px",
                 color: "white",
                 alignItems: "center",
                 justifyContent: "center",fontFamily: "SF Pro Display"

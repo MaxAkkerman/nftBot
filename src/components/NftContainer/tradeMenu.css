@@ -15,10 +15,10 @@
   font-size: 8px;
 }
 .loader_wrap{
-  min-height: calc(100vh - 596px);
+  margin-top:40px;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  /*margin-top: 20px;*/
   
 }
 .trades_title{

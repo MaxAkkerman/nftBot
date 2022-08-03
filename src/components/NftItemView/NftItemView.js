@@ -42,6 +42,7 @@ export function NftItemView() {
       try {
         let res = await openSaleRequest(currentNft.address, sellPrice)
         if (res.status === 200 || res.status === 201) {
+          console.log("getURLforSale",res.data)
           return res.data
         }
       } catch (e) {
@@ -50,7 +51,8 @@ export function NftItemView() {
     }
 
     getURLforSale().then(data=>setUrlSale(data))
-  },[])
+  },[sellPrice])
+
   async function openSale() {
     // try {
     //   let res = await openSaleRequest(address, sellPrice)
@@ -59,7 +61,7 @@ export function NftItemView() {
     //     let url = res.data
     //     console.log("aaaaaaaa",url)
     //     window.open(url, '_blank')
-    
+    if(!sellPrice)return
     function getBack(){
       dispatch(deleteCurrentNft())
       dispatch(deleteNftFromArr(currentNft.address))

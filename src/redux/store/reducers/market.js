@@ -44,7 +44,7 @@ const user_trades = {
   user_trades_error: false,
 }
 const user_nfts = {
-  user_nfts_array: arr,
+  user_nfts_array: [],
   userNftItemLoading: false,
   userNftItemError: null,
 }

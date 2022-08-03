@@ -28,6 +28,7 @@ export function TradeView() {
       const res = await getByNftAddress(currentTrade.nftAddress)
       if (res.status === 200 || res.status === 201) {
         let userData = await res.data;
+        console.log("getURLforSale",res.data)
         setCurNftByTrade(userData)
       }
     }
@@ -82,7 +83,6 @@ export function TradeView() {
           User Trade
         </div>
       </div>
-
       <div className={"trade_item_wrap"} key={CT.id}>
         <div className={"trade_item_img_wrap"}>
           <img src={mockIcon2} alt={"img"}/>
