@@ -29,13 +29,13 @@ const websocket = {
 const user_data = {
   pubkey: null,
   address: null,
-  fetchMeLoading:false,
+  fetchMeLoading: false,
   fetchMeError: null,
 }
-let mock = {name:"NFTtest",collectionName:"NFTCollectionNametest",address:"test address", image:mockIcon}
+let mock = {name: "NFTtest", collectionName: "NFTCollectionNametest", address: "test address", image: mockIcon}
 let arr = []
-for(let i = 0; i<7; i++){
-  arr.push({...mock,index:i})
+for (let i = 0; i < 7; i++) {
+  arr.push({...mock, index: i})
 }
 
 const user_trades = {
@@ -45,7 +45,7 @@ const user_trades = {
 }
 const user_nfts = {
   user_nfts_array: arr,
-  userNftItemLoading:false,
+  userNftItemLoading: false,
   userNftItemError: null,
 }
 
@@ -69,22 +69,25 @@ const initialState = {
 export default function appReducer(state = initialState, action) {
   switch (action.type) {
     case DELETE_NFT_FROM_ARR:
-      console.log("action.payload",action)
+      console.log("action.payload", action)
       return produce(state, (draft) => {
         let newArr = [...draft.user_nfts_array]
-        let filteredArr = newArr.filter(fr=>fr.address !== action.payload)
-        console.log("newArr",filteredArr)
+        let filteredArr = newArr.filter(fr => fr.address !== action.payload)
+        console.log("newArr", filteredArr)
         draft.user_nfts_array = [...filteredArr];
       });
     case ADD_USER_TRADE_BY_SEARCH:
-      console.log("action.payload",action)
+      console.log("action.payload", action)
       return produce(state, (draft) => {
-        draft.user_trades_added = [...draft.user_trades_added,action.payload];
+        draft.user_trades_added = [...draft.user_trades_added, action.payload];
       });
     case SEARCH_NFT_ITEM_SUCCESS:
-      console.log("action.payload",action)
+      console.log("action.payload", action)
       return produce(state, (draft) => {
-        draft.user_nfts_array = [...draft.user_nfts_array,action.payload];
+        draft.user_nfts_array === null ?
+          draft.user_nfts_array = [action.payload]
+          :
+          draft.user_nfts_array = [...draft.user_nfts_array, action.payload];
       });
     case SEARCH_NFT_ITEM_FAILED:
       return produce(state, (draft) => {
@@ -92,25 +95,37 @@ export default function appReducer(state = initialState, action) {
       });
     case TRADE_UPDATE:
       return produce(state, (draft) => {
-        let arrCopy = [...draft.user_trades]
-        arrCopy.map(n => n.id === action.payload.id ? action.payload : n)
-        draft.user_trades = arrCopy;
+        console.log("TRADE_UPDATE",action.payload)
+        if (action.payload.address !== action.payload.data.sellerAddress) {
+          draft.user_trades_added === null ?
+            draft.user_trades_added = [action.payload.data]
+            :
+            draft.user_trades_added = [...draft.user_trades_added, action.payload.data]
+
+        } else {
+          draft.user_trades === null ?
+            draft.user_trades = [action.payload.data]
+            :
+            draft.user_trades = [...draft.user_trades, action.payload.data]
+        
+      }
+
+
       });
     case SEARCH_TRADE_ITEM_SUCCESS:
       return produce(state, (draft) => {
-        console.log("draft.user_trades_added",draft.user_trades_added)
+        console.log("draft.user_trades_added", draft.user_trades_added)
         draft.user_trades_added === null ?
           draft.user_trades_added = [action.payload]
-        :
-        draft.user_trades_added = [...draft.user_trades_added,action.payload];
+          :
+          draft.user_trades_added = [...draft.user_trades_added, action.payload];
       });
     case SEARCH_TRADE_ITEM_FAILED:
       return produce(state, (draft) => {
         draft.searchTradeItemE = action.payload;
       });
-      
-      
-      
+
+
     case DELETE_CURRENT_TRADE:
       return produce(state, (draft) => {
         draft.currentTrade = null;
@@ -186,9 +201,7 @@ export default function appReducer(state = initialState, action) {
         draft.user_trades_error = true;
       });
 
-      
-      
-      
+
     default:
       return state;
   }

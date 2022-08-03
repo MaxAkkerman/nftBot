@@ -6,7 +6,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import {useState} from "react";
 import {useDispatch} from "react-redux";
 
-export default function AddCustomNft({type, handleRequest}) {
+export default function AddCustomNft({type, handleRequest,placeHolder}) {
   const dispatch = useDispatch();
   const [inpValue, setInpValue] = useState("")
 
@@ -40,20 +40,20 @@ export default function AddCustomNft({type, handleRequest}) {
         width: 400,
         background: "transparent",
         border: "1px solid rgba(25, 118, 210, 0.5)",
-        color: "#1976d2"
+        color: "#1976d2",borderRadius: "7px 7px 7px 7px",fontFamily: "SF Pro Display"
       }}
       variant={"outlined"}
     >
       <InputBase
-        sx={{ml: 1, flex: 1, color: "#1976d2", opacity: "1"}}
-        placeholder={`Search ${type} by ID`}
+        sx={{ml: 1, flex: 1, color: "#1976d2",opacity: "1",fontFamily: "SF Pro Display", fontSize:"10px"}}
+        placeholder={placeHolder}
         inputProps={{'aria-label': 'OutlinedInput'}}
         variant={"outlined"}
         value={inpValue}
         onChange={(e) => changeValue(e)}
       />
       <IconButton onClick={(e) => handleRequestNFT(e)} sx={{p: '7px', heigth: "25px"}} aria-label="search">
-        <SearchIcon/>
+        <SearchIcon style={{color:"#1976d2"}}/>
       </IconButton>
     </Paper>
   );

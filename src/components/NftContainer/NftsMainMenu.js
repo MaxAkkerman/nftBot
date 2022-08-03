@@ -4,7 +4,9 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {searchNftRequest, setCurrentNft} from "../../redux/store/actions/market";
 import {closeSaleRequest, getByNftAddress, getTrades, openSaleRequest} from "../../network/requests";
-import {Button} from "@mui/material";
+import {Button, ButtonGroup} from "@mui/material";
+import mockIcon2 from "../../images/title.png"
+import {getSplicedAddress} from "../../utils/utils";
 
 
 export function NftsMainMenu() {
@@ -45,7 +47,7 @@ export function NftsMainMenu() {
         <AddCustomNft
         type={"NFT"}
         handleRequest={(address)=>dispatch(searchNftRequest(address))}
-        
+        placeHolder={"Search by NFT Contract Address"}
         />
       </div>
       {userNftItemLoading ? (
@@ -72,27 +74,47 @@ export function NftsMainMenu() {
         )
         :
         ((myArr && myArr.length > 0) ?
-            <div className={"user_nfts_container"}>
-              {myArr.length && myArr.filter(fr=>fr.address === address).map(item => {
-                return <div className={"nft_item_wrapper"} id={item.index}
+            // <ButtonGroup className={"user_nfts_container"}>
+              <ButtonGroup className={"user_nfts_container"} style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gridColumnGap: "15px",
+                gridRowGap: "65px",
+                padding: "0px 0px",
+                marginTop: "40px",
+                fontFamily: "SF Pro Display"
+              }} size={"large"} variant="outlined"
+                           aria-label="outlined button group">
+              {myArr.length && myArr.filter(fr=>fr.ownerAddress === address).map(item => {
+                return <Button className={"nft_item_wrapper_btn"} style={{display: "flex",
+                  flexDirection: "column",
+                  fontSize: "9px",
+                  color:"white",
+                  borderRadius: "8px",
+                  height:"250px",
+                  padding: "12px",
+                  alignItems: "start"}} id={item.index}
                             onClick={(e, item) => handleClickNft(e, item)} key={item.address}>
                   <div className={"nft_item_img_wrap"}>
-                    <img src={item.image} alt={"img"}/>
+                    <img src={mockIcon2} alt={"img"}/>
+                  </div>
+                  <div style={{marginTop:"auto"}}>
+                    {item.name}
                   </div>
                   <div>
-                    Name address: {item.name}
+                    {item.collectionName}
                   </div>
                   <div>
-                    collectionName: {item.collectionName}
+                    NFT address:
                   </div>
-                  <div>
-                    nft address: {item.address}
+                  <div style={{marginTop:"-4px"}}>
+                    {getSplicedAddress(item.address)}
                   </div>
-                </div>
+                </Button>
                 
               })
               }
-            </div>
+            </ButtonGroup>
             :
             <div
               style={{
@@ -100,7 +122,7 @@ export function NftsMainMenu() {
                 display: "flex",
                 color: "white",
                 alignItems: "center",
-                justifyContent: "center"
+                justifyContent: "center",fontFamily: "SF Pro Display"
               }}
               className="modal-constructor modal-constructor-market"
             >

@@ -5,12 +5,16 @@
   grid-row-gap: 65px;
   padding: 0px 0px;
   margin-top: 40px;
+  font-family: SF Pro Display;
 }
 .nft_item_wrapper{
   height: 250px;
   width:100%;
   margin: auto;
   max-width: 170px;
+  border:2px solid white;
+  border-radius: 7px 7px 7px 7px;
+  font-family: SF Pro Display;
 }
 .nft_item_img_wrap{
   height: fit-content;
@@ -19,16 +23,4 @@
 .nft_btns_wrap{
   display:flex;
   /*flex-direction: column;*/
-}
-
-
-@media only screen and (min-width: 560px) {
-  .user_nfts_container{
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-@media only screen and (min-width: 800px) {
-  .user_nfts_container{
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
 }

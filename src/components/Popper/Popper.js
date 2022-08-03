@@ -31,13 +31,13 @@ export default function PopperApp() {
   
   return (
     <div className={"popper_container"} >
-      <button aria-describedby={id} type="button" className={"settings_wrap"} onClick={handleClick}>
-        <img className={"popper_img"} src={SettingsIcon} alt={"Settings"} />
+      <button aria-describedby={id} type="button"  className={"settings_wrap"} onClick={handleClick}>
+        <img className={"popper_img"} style={{color:"#1976d2"}} src={SettingsIcon} alt={"Settings"} />
       </button>
       
       <Popper id={id} open={open} anchorEl={anchorEl}>
         <div style={{height: "30px", display: "flex", cursor:"pointer"}} onClick={()=>logOut()}>
-          <div style={{alignSelf: "center"}}>
+          <div style={{alignSelf: "center",color:"#1976d2"}}>
             Log out
           </div>
             {/*<div style={{marginLeft: "22px"}}>*/}

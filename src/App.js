@@ -45,6 +45,7 @@ function App() {
   return (
 
     <div className="App">
+      <div style={{width:"auto",minWidth:"310px",maxWidth:"350px",margin:"auto"}}>
       {address ?
         (
           <>
@@ -57,6 +58,7 @@ function App() {
                     <TradeView/>
                     :
                     <>
+                      
                       <PopperApp/>
                       <TitleMenu/>
                       <NftView/>
@@ -71,9 +73,9 @@ function App() {
         />
       }
 
-      {/*<GetMeButton/>*/}
-    </div>
 
+    </div>
+    </div>
   );
 }
 

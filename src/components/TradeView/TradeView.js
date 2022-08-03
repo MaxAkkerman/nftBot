@@ -2,9 +2,9 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import "./TradeView.css"
 import {Button} from "@mui/material";
-import {cancelSaleRequest, closeSaleRequest, getByNftAddress} from "../../network/requests";
+import {cancelSaleRequest, closeSaleRequest, getByNftAddress, openSaleRequest} from "../../network/requests";
 import CloseIcon from '@mui/icons-material/HighlightOff';
-import {deleteCurrentTrade} from "../../redux/store/actions/market";
+import {deleteCurrentNft, deleteCurrentTrade, deleteNftFromArr} from "../../redux/store/actions/market";
 import mockIcon2 from "../../images/title.png"
 
 export function TradeView() {
@@ -15,7 +15,10 @@ export function TradeView() {
 
   const [CT, setCT] = useState([])
   const [curNftByTrade, setCurNftByTrade] = useState({})
-  
+
+  const [urlClose, setUrlClose] = useState(null)
+
+
   useEffect(() => {
     setCT(currentTrade)
   }, [])
@@ -39,15 +42,31 @@ export function TradeView() {
       dispatch(deleteCurrentTrade())
     }
   }
-
-  async function closeSale() {
-    let res = await closeSaleRequest(CT.id)
-    if (res.status === 200 || res.status === 201) {
-      let json = await res.data
-      console.log("closeSaleRequest", json)
-      dispatch(deleteCurrentTrade())
+  
+  
+  useEffect(()=>{
+    async function getURLforSale(){
+      try {
+        let res = await closeSaleRequest(CT.searchId)
+        if (res.status === 200 || res.status === 201) {
+          return res.data
+        }
+      } catch (e) {
+        console.log("openSalejson error", e)
+      }
     }
 
+    getURLforSale().then(data=>setUrlClose(data))
+  },[])
+  
+  
+  async function closeSale() {
+    function getBack(){
+      dispatch(deleteCurrentTrade())
+      // dispatch(deleteNftFromArr(currentNft.address))
+      setUrlClose(null)
+    }
+    setTimeout(()=>getBack(),2000)
   }
 
   console.log("CT.sellerAddress === address", CT.sellerAddress === address, CT, address)
@@ -56,7 +75,7 @@ export function TradeView() {
 
       <div className={"trade_item_data_wrap"}>
         <div style={{alignSelf: "flex-start"}} onClick={() => dispatch(deleteCurrentTrade())}>
-          <CloseIcon/>
+          <CloseIcon style={{color:"#1976d2"}}/>
           {/*<img src={CloseIcon} alt={"close"}/>*/}
         </div>
         <div className={"nft_title"}>
@@ -85,10 +104,11 @@ export function TradeView() {
         <div className={"set_price_input_wrap"}>
         </div>
         {address === currentTrade.sellerAddress ? 
-          <Button variant="outlined" sx={{fontSize: "10px", width: "100%"}} onClick={() => cancelSale()}>Cancel
+          <Button variant="outlined" sx={{fontSize: "10px", width: "100%",borderRadius: "7px 7px 7px 7px"}} onClick={() => cancelSale()}>Cancel
             sale</Button>
           :
-          <Button variant="outlined" sx={{fontSize: "10px", width: "100%"}} onClick={() => closeSale()}>Buy NFT</Button>
+          <Button variant="outlined" sx={{fontSize: "10px", width: "100%",borderRadius: "7px 7px 7px 7px"}} onClick={() => closeSale()}><a href={urlClose}>Buy NFT</a>
+            Buy NFT</Button>
         }
         
 

@@ -49,26 +49,27 @@ export function TitleMenu(){
       <div className={"user_profile_img_wrap"}>
         <img src={TitleIcon} alt={"Title image"}/>
       </div>
-      <div className={"user_profile_address_wrap"}>
-        {address ? getSplicedAddress(address) : "No User Address"}
+      <div className={"user_profile_address_wrap"} onClick={()=>copyToClipboard()}>
+        {address ? getSplicedAddress(address) : "No User Address"}{copied ? <div className={"user_profile_copy_link_text"}>Copied!</div> : <div style={{height:"14px"}}/>}
       </div>
+      
       <div className={"user_profile_title_wrap"}>
         User Profile
       </div>
     </div>
-  <div className={"user_profile_copy_link_wrap"}>
-    <Button
-      id="nav-connect-wallet"
-      className={"user_profile_copy_link_btn"}
-      style={{textTransform: "none"}}
-      variant={"outlined"}
-      onClick={() => copyToClipboard()}
-    >
-      Copy Link
-      {copied ? <div className={"user_profile_copy_link_text"}>Copied!</div> : null}
-    </Button>
+  {/*<div className={"user_profile_copy_link_wrap"}>*/}
+    {/*<Button*/}
+    {/*  id="nav-connect-wallet"*/}
+    {/*  className={"user_profile_copy_link_btn"}*/}
+    {/*  style={{textTransform: "none"}}*/}
+    {/*  variant={"outlined"}*/}
+    {/*  onClick={() => copyToClipboard()}*/}
+    {/*>*/}
+    {/*  Copy Link*/}
+    {/*  */}
+    {/*</Button>*/}
 
-  </div>
+  {/*</div>*/}
   </>
   )
 }

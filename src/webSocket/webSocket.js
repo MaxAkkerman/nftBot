@@ -1,6 +1,7 @@
 import {baseUrl} from "../network/constants";
 import { reduxStore } from '../lib/redux';
 import {setAuthUserData, setWebSocketStatus, tradeUpdate} from "../redux/store/actions/market";
+import {useSelector} from "react-redux";
 // import {getLoginToken} from "../network/requests";
 
 const { io } = require("socket.io-client");
@@ -31,9 +32,9 @@ export async function webSocket(){
   });
   socket.on('trade-update', function(data) {
     console.log('trade-update', data);
-
+    let address = useSelector(state=>state.appReducer.address)
     reduxStore.dispatch(
-      tradeUpdate(data),
+      tradeUpdate({data, address}),
     );
     // let json = JSON.stringify([data])
     // let trades = JSON.parse(localStorage.getItem("trades"))

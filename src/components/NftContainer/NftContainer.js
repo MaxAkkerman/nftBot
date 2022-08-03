@@ -30,8 +30,8 @@ export function NftView() {
     {/*</div>*/}
     <ButtonGroup size={"large"} sx={{marginTop: "20px", width: "100%",display:"flex",justifyContent:"center"}} variant="outlined"
                  aria-label="outlined button group">
-      <Button sx={{fontSize: "10px",width:"100%"}} onClick={() => handleShowTrades()}>Trades</Button>
-      <Button sx={{fontSize: "10px",width:"100%"}} onClick={() => handleShowUserNfts()}>Nfts</Button>
+      <Button sx={{fontSize: "10px",width:"100%",borderRadius: "7px 0 0 7px",fontFamily: "SF Pro Display"}} onClick={() => handleShowTrades()}>Trades</Button>
+      <Button sx={{fontSize: "10px",width:"100%",borderRadius: "0 7px 7px 0",fontFamily: "SF Pro Display"}} onClick={() => handleShowUserNfts()}>Sell NFTs</Button>
 
     </ButtonGroup>
     {showIt ? <NftsMainMenu/>

@@ -47,8 +47,13 @@ export function TradesMenu() {
   useEffect(()=>{
     dispatch(requestUserTrades())
   },[])
+
   
-  
+  async function handleClickTradeAdded(e, nft) {
+    let curF = user_trades_added.filter(it => e.currentTarget.id === it.id)
+    console.log("tradecer", e.currentTarget.id,curF)
+    dispatch(setCurrentTrade(curF[0]))
+  }
   async function handleClickTrade(e, nft) {
     let curF = user_trades.filter(it => e.currentTarget.id === it.id)
     console.log("tradecer", e.currentTarget.id,curF)
@@ -63,6 +68,7 @@ export function TradesMenu() {
         <AddCustomNft
           type={"Trade"}
           handleRequest={(tradeID)=>dispatch(searchTradeRequest(tradeID,address))}
+          placeHolder={"Search Trade by ID from Seller"}
         />
       </div>
       {user_trades_added && <>
@@ -72,9 +78,9 @@ export function TradesMenu() {
         <div className={"user_trades_container"}>
           {[...user_trades_added].map(item => {
             return <Button disabled={tradeStatus.includes(item.status)} variant={"outlined"}
-                           style={{fontSize: "7px", marginTop: "5px", display: "flex", justifyContent: "space-evenly"}}
+                           style={{fontSize: "7px", marginTop: "5px", display: "flex", justifyContent: "space-evenly",borderRadius: "7px 7px 7px 7px"}}
                            className={"trade_item_wrapper"} id={item.id}
-                           onClick={(e, item) => handleClickTrade(e, item)} key={item.i}>
+                           onClick={(e, item) => handleClickTradeAdded(e, item)} key={item.i}>
               {/*<div className={"nft_item_img_wrap"}>*/}
               {/*  <img src={item.image} alt={"img"}/>*/}
               {/*</div>*/}
