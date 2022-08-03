@@ -3,7 +3,6 @@ import Loader from "../Loader/Loader";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {searchNftRequest, setCurrentNft} from "../../redux/store/actions/market";
-import {closeSaleRequest, getByNftAddress, getTrades, openSaleRequest} from "../../network/requests";
 import {Button, ButtonGroup} from "@mui/material";
 import mockIcon2 from "../../images/title.png"
 import {getSplicedAddress} from "../../utils/utils";
@@ -90,13 +89,13 @@ export function NftsMainMenu() {
                   flexDirection: "column",
                   fontSize: "9px",
                   color:"white",
-                  borderRadius: "8px",
+                  borderRadius: "12px",
                   height:"250px",
                   padding: "12px",
                   alignItems: "start"}} id={item.index}
                             onClick={(e, item) => handleClickNft(e, item)} key={item.address}>
                   <div className={"nft_item_img_wrap"}>
-                    <img src={mockIcon2} alt={"img"}/>
+                    <img style={{borderRadius: "10px"}} src={item.image} alt={"img"}/>
                   </div>
                   <div style={{marginTop:"auto"}}>
                     {item.name}

@@ -89,7 +89,7 @@ export function NftItemView() {
 
       <div className={"trade_item_wrap"} key={currentNft.index}>
         <div className={"trade_item_img_wrap"}>
-          <img src={mockIcon2} alt={"img"}/>
+          <img style={{borderRadius: "25px"}} src={currentNft.image} alt={"img"}/>
         </div>
         <div className={"trade_item_text_wrap"}>
           <div>

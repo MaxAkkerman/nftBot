@@ -46,10 +46,12 @@ export function TradeView() {
   
   
   useEffect(()=>{
+    console.log("openSalejson error", CT, currentTrade)
     async function getURLforSale(){
       try {
-        let res = await closeSaleRequest(CT.searchId)
+        let res = await closeSaleRequest(currentTrade.searchId)
         if (res.status === 200 || res.status === 201) {
+          console.log("getURLforSale",res.data)
           return res.data
         }
       } catch (e) {
@@ -83,22 +85,24 @@ export function TradeView() {
           User Trade
         </div>
       </div>
+      
       <div className={"trade_item_wrap"} key={CT.id}>
         <div className={"trade_item_img_wrap"}>
-          <img src={mockIcon2} alt={"img"}/>
+          <img style={{borderRadius: "25px"}} src={curNftByTrade.image} alt={"img"}/>
         </div>
         <div className={"trade_item_text_wrap"}>
-          <div>
+          <div onClick={()=>console.log(urlClose)}>
             NFT Name: {curNftByTrade.name}
-          </div>
-          <div>
-            Trade ID: {CT.searchId}
           </div>
           <div>
             Collection: {curNftByTrade.collectionName}
           </div>
           <div>
-            Status: {CT.status}
+            Trade ID: {currentTrade.searchId}
+          </div>
+          
+          <div>
+            Status: {currentTrade.status}
           </div>
         </div>
         <div className={"set_price_input_wrap"}>

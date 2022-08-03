@@ -44,6 +44,7 @@ img{
 .user_profile_address_wrap{
   margin-top: 20px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .user_profile_title_wrap{

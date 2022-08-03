@@ -1,11 +1,6 @@
-import AddCustomNft from "../AddCutomNft/AddCustomNft";
 import React, {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import Loader from "../Loader/Loader";
 import "./NFTContainerStyles.css"
 import {Button, ButtonGroup} from "@mui/material";
-import {setCurrentNft} from "../../redux/store/actions/market";
-import {closeSaleRequest, openSaleRequest} from "../../network/requests";
 import {TradesMenu} from "./TradesMenu";
 import {NftsMainMenu} from "./NftsMainMenu";
 
