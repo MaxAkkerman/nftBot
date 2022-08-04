@@ -26,13 +26,15 @@ export default function ConnectToTonKeeper() {
           height: "200px",
           margin: "auto",padding: "40px 40px 10px 40px"}}>
           <img src={titleImg} alt={"titleImg"}/>
-          
         </div>
         <div>NFT exchange</div>
         {loading
           ?
+          <div
+            className="loader_wrap"
+          >
           <Loader/>
-
+          </div>
           :
 
           (error ?
