@@ -10,6 +10,7 @@ import InputBase from "@mui/material/InputBase";
 import Paper from "@mui/material/Paper";
 import mockIcon2 from "../../images/title.png"
 import {getSplicedAddress} from "../../utils/utils";
+import closeImg from "../../images/close.svg";
 
 
 const useStyles = makeStyles({
@@ -62,9 +63,8 @@ export function NftItemView() {
   return (
     <div className={"trade_item_container"}>
       <div className={"trade_item_data_wrap"}>
-        <div onClick={() => dispatch(deleteCurrentNft())}>
-          <CloseIcon style={{color:"#1976d2"}}/>
-          {/*<img src={CloseIcon} alt={"close"}/>*/}
+        <div style={{height: "24px"}} onClick={() => dispatch(deleteCurrentNft())}>
+          <img src={closeImg} alt={"close"}/>
         </div>
         <div className={"nft_title"}>
           User NFT
@@ -85,7 +85,10 @@ export function NftItemView() {
           <div>
             Address: {getSplicedAddress(currentNft.address)}
           </div>
-         
+          <div>
+            Collection Address: {getSplicedAddress(currentNft.collectionAddress)}
+          </div>
+          
         </div>
         <div className={"set_price_input_wrap"}>
           <Paper
@@ -113,7 +116,7 @@ export function NftItemView() {
             />
           </Paper>
         </div>
-        <Button variant="outlined" sx={{fontSize: "10px", width: "100%", marginTop: "10px",borderRadius: "7px 7px 7px 7px"}} onClick={() => openSale()}>
+        <Button variant="outlined" sx={{fontSize: "10px", width: "100%", marginTop: "10px",borderRadius: "7px 7px 7px 7px", height:"40px"}} onClick={() => openSale()}>
           Open Sale
         </Button>
         

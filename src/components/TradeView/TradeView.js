@@ -7,6 +7,7 @@ import CloseIcon from '@mui/icons-material/HighlightOff';
 import {deleteCurrentNft, deleteCurrentTrade, deleteNftFromArr} from "../../redux/store/actions/market";
 import mockIcon2 from "../../images/title.png"
 import Loader from "../Loader/Loader";
+import closeImg from "../../images/close.svg"
 
 export function TradeView() {
 
@@ -86,9 +87,9 @@ const [loading,setLoading] = useState(false)
     <div className={"trade_item_container"}>
 
       <div className={"trade_item_data_wrap"}>
-        <div style={{alignSelf: "flex-start"}} onClick={() => dispatch(deleteCurrentTrade())}>
-          <CloseIcon style={{color: "#1976d2"}}/>
-          {/*<img src={CloseIcon} alt={"close"}/>*/}
+        <div style={{alignSelf: "flex-start",height: "24px"}} onClick={() => dispatch(deleteCurrentTrade())}>
+          {/*<CloseIcon style={{color: "#1976d2"}}/>*/}
+          <img src={closeImg} alt={"close"}/>
         </div>
         <div className={"nft_title"}>
           User Trade
@@ -124,10 +125,10 @@ const [loading,setLoading] = useState(false)
         <div className={"set_price_input_wrap"}>
         </div>
         {address === currentTrade.sellerAddress ?
-          <Button variant="outlined" sx={{fontSize: "10px", width: "100%", borderRadius: "7px 7px 7px 7px"}}
+          <Button variant="outlined" sx={{fontSize: "10px", width: "100%", borderRadius: "7px 7px 7px 7px",height: "40px"}}
                   onClick={() => cancelSale()}>Cancel sale</Button>
           :
-          <Button variant="outlined" sx={{fontSize: "10px", width: "100%", borderRadius: "7px 7px 7px 7px"}}
+          <Button variant="outlined" sx={{fontSize: "10px", width: "100%", borderRadius: "7px 7px 7px 7px",height: "40px"}}
                   onClick={() => closeSale()}>Buy NFT</Button>
         }
 
@@ -136,10 +137,10 @@ const [loading,setLoading] = useState(false)
             Are you sure?
           </div>
           <a href={urlClose}>
-          <Button variant="outlined" sx={{fontSize: "10px", width: "100%", borderRadius: "7px 7px 7px 7px"}}>Yes</Button>
+          <Button variant="outlined" sx={{fontSize: "10px", width: "100%", borderRadius: "7px 7px 7px 7px",height: "40px"}}>Yes</Button>
           </a>
           <Button variant="outlined" onClick={() => quitWin()}
-                  sx={{fontSize: "10px", width: "100%", borderRadius: "7px 7px 7px 7px"}}>No</Button>
+                  sx={{fontSize: "10px", width: "100%", borderRadius: "7px 7px 7px 7px",height: "40px"}}>No</Button>
         </div>
         }
       </div>

@@ -35,4 +35,5 @@
 }
 .set_price_input_wrap{
   display:flex;
+  height:40px;
 }

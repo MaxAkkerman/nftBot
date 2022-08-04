@@ -46,7 +46,7 @@ function App() {
 
     <div className="App">
       <div style={{width:"auto",minWidth:"310px",maxWidth:"350px",margin:"auto"}}>
-      {!address ?
+      {address ?
         (
           <>
             {
