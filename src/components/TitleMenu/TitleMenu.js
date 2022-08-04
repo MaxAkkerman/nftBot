@@ -1,4 +1,4 @@
-import TitleIcon from "../../images/title.png";
+import TitleIcon from "../../images/ton.png";
 import {getSplicedAddress} from "../../utils/utils";
 import React, {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
@@ -12,7 +12,7 @@ export function TitleMenu(){
 
   useEffect(() => {
     if (copied) {
-      setTimeout(() => setCopied(false), 2000)
+      setTimeout(() => setCopied(false), 800)
     }
   }, [copied])
   

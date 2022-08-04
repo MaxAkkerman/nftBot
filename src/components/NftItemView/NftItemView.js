@@ -37,7 +37,8 @@ export function NftItemView() {
   const [sellPrice, setSellPrice] = useState(null)
   const [urlSale, setUrlSale] = useState(null)
 
-  useEffect(()=>{
+  async function openSale() {
+    if(!sellPrice)return
     async function getURLforSale(){
       try {
         let res = await openSaleRequest(currentNft.address, sellPrice)
@@ -49,32 +50,15 @@ export function NftItemView() {
         console.log("openSalejson error", e)
       }
     }
-
     getURLforSale().then(data=>setUrlSale(data))
-  },[sellPrice])
-
-  async function openSale() {
-    // try {
-    //   let res = await openSaleRequest(address, sellPrice)
-    //   if (res.status === 200 || res.status === 201) {
-    //    
-    //     let url = res.data
-    //     console.log("aaaaaaaa",url)
-    //     window.open(url, '_blank')
-    if(!sellPrice)return
-    function getBack(){
-      dispatch(deleteCurrentNft())
-      dispatch(deleteNftFromArr(currentNft.address))
-      setUrlSale(null)
-    }
-    setTimeout(()=>getBack(),2000)
-        
-    //   }
-    // } catch (e) {
-    //   console.log("openSalejson error", e)
-    // }
   }
-
+  
+  function quitWinT(){
+    dispatch(deleteCurrentNft())
+    dispatch(deleteNftFromArr(currentNft.address))
+    setUrlSale(null)
+  }
+  
   return (
     <div className={"trade_item_container"}>
       <div className={"trade_item_data_wrap"}>
@@ -130,9 +114,26 @@ export function NftItemView() {
           </Paper>
         </div>
         <Button variant="outlined" sx={{fontSize: "10px", width: "100%", marginTop: "10px",borderRadius: "7px 7px 7px 7px"}} onClick={() => openSale()}>
-          <a href={urlSale}>Open
-            sale</a>
+          Open Sale
         </Button>
+        
+        {urlSale &&
+        <div style={{marginTop: "20px", marginBottom: "10px"}}>
+            Are you sure?
+          <a href={urlSale}>
+            <Button variant="outlined" sx={{fontSize: "10px", width: "100%", marginTop: "10px",borderRadius: "7px 7px 7px 7px"}}>
+            Yes
+          </Button>
+          </a>
+          <Button variant="outlined" sx={{fontSize: "10px", width: "100%", marginTop: "10px",borderRadius: "7px 7px 7px 7px"}} onClick={() => quitWinT()}>
+         No
+          </Button>
+          </div>
+        }
+        
+        
+        
+        
       </div>
     </div>
   )

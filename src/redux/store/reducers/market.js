@@ -67,6 +67,7 @@ const initialState = {
 };
 
 export default function appReducer(state = initialState, action) {
+  console.log("state",state)
   switch (action.type) {
     case DELETE_NFT_FROM_ARR:
       console.log("action.payload", action)
@@ -96,7 +97,7 @@ export default function appReducer(state = initialState, action) {
     case TRADE_UPDATE:
       return produce(state, (draft) => {
         console.log("TRADE_UPDATE",action.payload)
-        if (action.payload.address !== action.payload.data.sellerAddress) {
+        if (state.address !== action.payload.data.sellerAddress) {
           draft.user_trades_added === null ?
             draft.user_trades_added = [action.payload.data]
             :

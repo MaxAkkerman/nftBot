@@ -45,7 +45,7 @@ export default function AddCustomNft({type, handleRequest,placeHolder}) {
       variant={"outlined"}
     >
       <InputBase
-        sx={{ml: 1, flex: 1, color: "#1976d2",opacity: "1",fontFamily: "SF Pro Display", fontSize:"10px"}}
+        sx={{ml: 1, flex: 1, color: "#1976d2",opacity: "1",fontFamily: "SF Pro Display", fontSize:"16px"}}
         placeholder={placeHolder}
         inputProps={{'aria-label': 'OutlinedInput'}}
         variant={"outlined"}

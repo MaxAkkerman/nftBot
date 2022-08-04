@@ -37,7 +37,7 @@ export async function openSaleRequest(nftAddress,nftPrice){
 
 export async function closeSaleRequest(tradeId){
   console.log("closeSaleRequest",tradeId)
-  return await axios.post(`${baseUrl}/api/trades/close`, {tradeId:tradeId},{withCredentials:true})
+  return await axios.post(`${baseUrl}/api/trades/close`, {searchId:(tradeId).toString()},{withCredentials:true})
 }
 
 export async function cancelSaleRequest(tradeId){

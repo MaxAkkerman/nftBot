@@ -88,7 +88,7 @@ export function NftsMainMenu() {
                 return <Button className={"nft_item_wrapper_btn"} style={{display: "flex",
                   flexDirection: "column",
                   fontSize: "9px",
-                  color:"white",
+                  // color:"white",
                   borderRadius: "12px",
                   height:"250px",
                   padding: "12px",
@@ -120,11 +120,11 @@ export function NftsMainMenu() {
                 // minHeight: `calc(100vh - 596px)`,
                 display: "flex",
                 marginTop:"40px",
-                color: "white",
+                color: "#E8E6E3",
                 alignItems: "center",
                 justifyContent: "center",fontFamily: "SF Pro Display"
               }}
-              className="modal-constructor modal-constructor-market"
+              // className="modal-constructor modal-constructor-market"
             >
               There is nothing here yet...
             </div>

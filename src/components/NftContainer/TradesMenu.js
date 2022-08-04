@@ -78,14 +78,14 @@ export function TradesMenu() {
         <div className={"user_trades_container"}>
           {[...user_trades_added].map(item => {
             return <Button disabled={tradeStatus.includes(item.status)} variant={"outlined"}
-                           style={{fontSize: "7px", marginTop: "5px", display: "flex", justifyContent: "space-evenly",borderRadius: "7px 7px 7px 7px"}}
+                           style={{fontSize: "7px", marginTop: "5px", display: "flex", justifyContent: "space-evenly",borderRadius: "7px 7px 7px 7px",color: `${tradeStatus.includes(item.status) ? "white" : null}`, border: `${tradeStatus.includes(item.status) ? "1px solid white" : null}`}}
                            className={"trade_item_wrapper"} id={item.id}
                            onClick={(e, item) => handleClickTradeAdded(e, item)} key={item.i}>
               {/*<div className={"nft_item_img_wrap"}>*/}
               {/*  <img src={item.image} alt={"img"}/>*/}
               {/*</div>*/}
               <div>
-                Trade ID: {item.id}
+                Trade ID: {item.searchId}
               </div>
               <div>
                 Price: {item.nftPrice} ton
@@ -123,13 +123,13 @@ export function TradesMenu() {
           </div>
             <div className={"user_trades_container"}>
               {[...user_trades].filter(item=>item.sellerAddress === address).sort((a,b)=>compareFunc(a,b)).map(item => {
-                return <Button disabled={tradeStatus.includes(item.status)} variant={"outlined"} style={{fontSize:"7px",marginTop:"5px",display:"flex", justifyContent:"space-evenly"}} className={"trade_item_wrapper"} id={item.id}
+                return <Button disabled={tradeStatus.includes(item.status)} variant={"outlined"} style={{fontSize:"7px",marginTop:"5px",display:"flex", justifyContent:"space-evenly",color: `${tradeStatus.includes(item.status) ? "white" : null}`, border: `${tradeStatus.includes(item.status) ? "1px solid white" : null}`}} className={"trade_item_wrapper"} id={item.id}
                             onClick={(e, item) => handleClickTrade(e, item)} key={item.i}>
                   {/*<div className={"nft_item_img_wrap"}>*/}
                   {/*  <img src={item.image} alt={"img"}/>*/}
                   {/*</div>*/}
                   <div>
-                    Trade ID: {item.id}
+                    Trade ID: {item.searchId ? item.searchId : "Closed sale"}
                   </div>
                   <div>
                     Price: {item.nftPrice} ton
@@ -144,7 +144,14 @@ export function TradesMenu() {
           </>
             :
             <div
-              className="loader_wrap"
+              style={{
+                // minHeight: `calc(100vh - 596px)`,
+                display: "flex",
+                marginTop:"40px",
+                color: "#E8E6E3",
+                alignItems: "center",
+                justifyContent: "center",fontFamily: "SF Pro Display"
+              }}
             >
               There is nothing here yet...
             </div>

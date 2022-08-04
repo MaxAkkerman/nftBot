@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  
+  margin: 0px 35px;
 }
 .trade_item_img_wrap{
   height: fit-content;

@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import useHandleLogin from "../../hooks/useSelectPopup";
 import Loader from "../Loader/Loader.js";
 import {Button} from "@mui/material";
+import titleImg from "../../images/ton.png"
 
 export default function ConnectToTonKeeper() {
   
@@ -20,11 +21,14 @@ export default function ConnectToTonKeeper() {
   return (
     <>
 
-      <header className="header">
-        <div>
-          Connect wallet
+      <div className="auth_container">
+        <div style={{    width: "200px",
+          height: "200px",
+          margin: "auto",padding: "40px 40px 10px 40px"}}>
+          <img src={titleImg} alt={"titleImg"}/>
+          
         </div>
-
+        <div>NFT exchange</div>
         {loading
           ?
           <Loader/>
@@ -32,29 +36,35 @@ export default function ConnectToTonKeeper() {
           :
 
           (error ?
-            <div>some error {status}</div>
+            <div>Some error {status}</div>
 
             : (url.length ?
-                <>
-                  <div>
-                    <a href={url}>
-                      {url}</a>
-                  </div>
+                <div style={{marginTop: "50px"}}>
+                <a href={url}>
                   <Button
                     id="nav-connect-wallet"
                     // className="btn wallet-btn"
                     variant={"outlined"}
-
+                    style={{
+                      width: "100%",
+                      height: "50px",
+                      fontSize: "18px",
+                      background: "deepskyblue",
+                      textTransform: "capitalize",
+                      borderRadius: "14px",
+                      color:"#E8E6E3"
+                    }}
                   >
-                    <a href={url}>TonKeeper</a>
+                    открыть Tonkeeper
                   </Button>
-                </>
+                </a>
+                </div>
                 : null
             ))
         }
 
 
-      </header>
+      </div>
     </>
   );
 }

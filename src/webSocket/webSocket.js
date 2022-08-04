@@ -32,9 +32,8 @@ export async function webSocket(){
   });
   socket.on('trade-update', function(data) {
     console.log('trade-update', data);
-    let address = useSelector(state=>state.appReducer.address)
     reduxStore.dispatch(
-      tradeUpdate({data, address}),
+      tradeUpdate({data}),
     );
     // let json = JSON.stringify([data])
     // let trades = JSON.parse(localStorage.getItem("trades"))
