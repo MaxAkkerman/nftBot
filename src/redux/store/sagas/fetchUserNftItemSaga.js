@@ -4,7 +4,7 @@ import {
 	takeLatest,
 } from "redux-saga/effects";
 
-import fetchUserNftItem from "../../utils/fetchUserNftItem";
+import fetchUserNfts from "../../utils/fetchUserNftItem";
 import {
   requestUserNftItemLoading,
   requestUserNftItemSuccess,
@@ -13,12 +13,12 @@ import {
 import {REQUEST_USER_NFT_ITEM} from "../actions/types";
 // import {takeEvery} from "@redux-saga/core/types/effects";
 
-function* asyncfetchUserNftItem(params) {
-  console.log("asyncfetchUserNftItemparams",params)
+function* asyncfetchUserNfts() {
+  console.log("asyncfetchUserNftItem",)
 
   yield put(requestUserNftItemLoading());
 	try {
-		const userData = yield call(fetchUserNftItem,params);
+		const userData = yield call(fetchUserNfts);
     console.log("userData", userData)
 		yield put(requestUserNftItemSuccess(userData));
 	} catch (e) {
@@ -27,5 +27,5 @@ function* asyncfetchUserNftItem(params) {
 }
 
 export default function* fetchUserNftItemSaga() {
-	yield takeLatest(REQUEST_USER_NFT_ITEM, asyncfetchUserNftItem);
+	yield takeLatest(REQUEST_USER_NFT_ITEM, asyncfetchUserNfts);
 }

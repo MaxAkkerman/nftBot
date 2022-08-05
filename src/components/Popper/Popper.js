@@ -5,11 +5,15 @@ import SettingsIcon from "../../images/settings.svg";
 import "./index.css"
 import ExitIcon from "../../images/exit.png"
 import {makeStyles} from "@mui/styles";
+import {logOutRequest} from "../../network/requests";
+import {setAuthUserData} from "../../redux/store/actions/market";
+import {useDispatch} from "react-redux";
+import {Button} from "@mui/material";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    inset: "15px auto auto -24px"
-    
+    inset: "15px auto auto -24px",
+    top: "10px",left: "-17px"
   },
 }));
 
@@ -17,7 +21,7 @@ const useStyles = makeStyles(theme => ({
 export default function PopperApp() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const classes = useStyles();
-  
+  const dispatch = useDispatch();
   const handleClick = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
@@ -25,7 +29,9 @@ export default function PopperApp() {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popper' : undefined;
 
-  function logOut(){
+  async function logOut(){
+    await logOutRequest()
+    dispatch(setAuthUserData({address:null,pubkey:null}))
     console.log("log out")
   }
   
@@ -35,11 +41,11 @@ export default function PopperApp() {
         <img className={"popper_img"} style={{color:"#1976d2"}} src={SettingsIcon} alt={"Settings"} />
       </button>
       
-      <Popper id={id} open={open} anchorEl={anchorEl}>
-        <div style={{height: "30px", display: "flex", cursor:"pointer"}} onClick={()=>logOut()}>
-          <div style={{alignSelf: "center",color:"#1976d2"}}>
+      <Popper id={id} open={open} anchorEl={anchorEl} className={classes.root} sx={{top: "10px",left: "-17px"}}>
+        {/*<div style={{height: "30px", display: "flex", cursor:"pointer"}} onClick={()=>logOut()}>*/}
+          <Button onClick={()=>logOut()} style={{alignSelf: "center",color:"#1976d2"}}>
             Log out
-          </div>
+          </Button>
             {/*<div style={{marginLeft: "22px"}}>*/}
             {/*  <img src={ExitIcon} alt={"Exit"}/>*/}
             {/*</div>*/}
@@ -47,7 +53,7 @@ export default function PopperApp() {
          
           
           
-        </div>
+        {/*</div>*/}
         
       </Popper>
     </div>

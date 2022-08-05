@@ -85,6 +85,10 @@ export default function appReducer(state = initialState, action) {
     case SEARCH_NFT_ITEM_SUCCESS:
       console.log("action.payload", action)
       return produce(state, (draft) => {
+        if(!action.payload || action.payload.ownerAddress === state.address) {
+          console.log("you have the save NFT")
+          return
+        }
         draft.user_nfts_array === null ?
           draft.user_nfts_array = [action.payload]
           :
@@ -175,7 +179,7 @@ export default function appReducer(state = initialState, action) {
       });
     case REQUEST_USER_NFT_ITEM_SUCCESS:
       return produce(state, (draft) => {
-        draft.user_nfts_array = [...draft.user_nfts_array, action.payload];
+        draft.user_nfts_array = action.payload;
         draft.userNftItemLoading = false;
         draft.userNftItemError = false;
       });

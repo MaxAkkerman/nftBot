@@ -3,6 +3,7 @@ import {getSplicedAddress} from "../../utils/utils";
 import React, {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {Button} from "@mui/material";
+import titleImg from "../../images/ton.png";
 
 export function TitleMenu(){
 
@@ -46,9 +47,17 @@ export function TitleMenu(){
   return (
     <>
     <div className={"user_profile_container"}>
-      <div className={"user_profile_img_wrap"}>
+      {/*<div className={"user_profile_img_wrap"}>*/}
+      {/*  <img src={TitleIcon} alt={"Title image"}/>*/}
+      {/*</div>*/}
+      <div style={{width: "200px",
+        height: "200px",
+        margin: "auto",padding: "25px 40px 10px 40px"}}>
         <img src={TitleIcon} alt={"Title image"}/>
       </div>
+      
+      
+      
       <div className={"user_profile_address_wrap"} onClick={()=>copyToClipboard()}>
         {address ? getSplicedAddress(address) : "No User Address"}{copied ? <div className={"user_profile_copy_link_text"}>Copied!</div> : <div style={{height:"14px"}}/>}
       </div>

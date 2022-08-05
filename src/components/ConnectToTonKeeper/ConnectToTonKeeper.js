@@ -22,12 +22,12 @@ export default function ConnectToTonKeeper() {
     <>
 
       <div className="auth_container">
-        <div style={{    width: "200px",
+        <div style={{width: "200px",
           height: "200px",
-          margin: "auto",padding: "40px 40px 10px 40px"}}>
+          margin: "auto",padding: "25px 40px 10px 40px"}}>
           <img src={titleImg} alt={"titleImg"}/>
         </div>
-        <div>NFT exchange</div>
+        <div style={{marginTop:"auto auto 0px auto"}}>NFT exchange</div>
         {loading
           ?
           <div
@@ -41,7 +41,7 @@ export default function ConnectToTonKeeper() {
             <div>Some error {status}</div>
 
             : (url.length ?
-                <div style={{marginTop: "50px"}}>
+                <div style={{marginTop: "auto", marginBottom: "30px"}}>
                 <a href={url}>
                   <Button
                     id="nav-connect-wallet"

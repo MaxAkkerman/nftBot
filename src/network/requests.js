@@ -9,6 +9,11 @@ export async function getLoginToken(){
 
   // return await axios.post(`${baseUrl}/auth/login`, {withCredentials:true})
 }
+export async function logOutRequest(){
+  return await axios.post(`${baseUrl}/api/auth/logout`, {withCredentials:true})
+
+  // return await axios.post(`${baseUrl}/auth/login`, {withCredentials:true})
+}
 export async function getMe(){
   return await axios.get(`${baseUrl}/api/auth/me`, {withCredentials:true})
 }

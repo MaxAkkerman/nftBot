@@ -1,22 +1,14 @@
-import {getByNftAddress} from "../../network/requests";
+import {getAllNftsByOwner, getByNftAddress} from "../../network/requests";
 
-export default async function fetchUserNftItem({params}) {
-  console.log("nftAddress",params.nftAddress)
+export default async function fetchUserNfts() {
+  console.log("fetchUserNftItem")
   try {
-    const res = await getByNftAddress(params.nftAddress)
-    console.log("fetchUserNftItem", res)
-    if (res.ok) {
-      let userData = await res.json();
-      if(userData.hasOwnProperty("address") && userData){
-        console.log("fetchUserNftItem", userData)
-        return userData
-      }
-      
+    
+    let res = await getAllNftsByOwner()
+    if(res.status === 200 || res.status === 201){
+      console.log("getNFTsMainnet",res.data)
+      return res.data
     }
-    // else {
-    //   console.log("fetchUserData error", res)
-    //   throw error
-    // }
 
   } catch (e) {
     console.log("fetchUserData error ", e)
