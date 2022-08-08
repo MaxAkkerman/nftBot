@@ -18,19 +18,6 @@ function App() {
   const currentNft = useSelector((state) => state.appReducer.currentNft);
   const currentTrade = useSelector((state) => state.appReducer.currentTrade);
 
-  useEffect(()=>{
-    async function connect(){
-      const res = await getLoginToken().then(async()=>await webSocket())
-      console.log("in index ",res)
-      // async function onWebSocket() {
-      //   await webSocket()
-      // }
-
-      // onWebSocket().then(res=>console.log("onWebSocket", res))
-    }
-    connect()
-    
-  },[])
   useEffect(() => {
     async function getMyCred() {
       try {
