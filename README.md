@@ -42,5 +42,5 @@ Your app is ready to be deployed!
 
 ### Set token to server
 
-В файле .env в репозитории сервера добавить название бота и его токен.
+В файле .env в репозитории сервера добавить - название бота(TELEGRAM_BOT_NAME) и его токен (TELEGRAM_BOT_KEY).
 
