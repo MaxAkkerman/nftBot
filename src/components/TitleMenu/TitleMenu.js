@@ -52,7 +52,7 @@ export function TitleMenu(){
       {/*</div>*/}
       <div style={{width: "200px",
         height: "200px",
-        margin: "auto",padding: "25px 40px 10px 40px"}}>
+        margin: "auto",padding: "25px 40px 10px 40px"}} onClick={()=>console.log("document.cookie",document)}>
         <img src={TitleIcon} alt={"Title image"}/>
       </div>
       

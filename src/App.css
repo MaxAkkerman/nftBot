@@ -37,6 +37,7 @@ img{
 .nft_title{
   font-size:20px;
  color:#1976d2;
+  margin-left:auto;
 }
 .nft_custom_search_container{
   display:flex;

@@ -6,7 +6,7 @@
 .trade_item_data_wrap{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  /*justify-content: space-between;*/
   margin-top: 20px;
 }
 .trade_item_img_wrap{

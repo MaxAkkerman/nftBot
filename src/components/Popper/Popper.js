@@ -30,6 +30,7 @@ export default function PopperApp() {
   const id = open ? 'simple-popper' : undefined;
 
   async function logOut(){
+    localStorage.removeItem("needToReload")
     await logOutRequest()
     dispatch(setAuthUserData({address:null,pubkey:null}))
     console.log("log out")

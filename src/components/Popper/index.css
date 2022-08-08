@@ -7,6 +7,8 @@
 .settings_wrap{
   background: transparent;
   border: none;
+  width: 40px;
+  margin-left: auto;
 }
 .popper_img{
   height:100%;

@@ -18,63 +18,71 @@ function App() {
   const currentTrade = useSelector((state) => state.appReducer.currentTrade);
 
   useEffect(() => {
-    async function getMyCred(){
-      try{
+    async function getMyCred() {
+      try {
         const res = await getMe()
-        console.log("res",res)
+        console.log("res", res)
         if (res.status === 201 || res.status === 200) {
           console.log("res", res)
           let userData = await res.data
-          console.log("getMe",userData)
+          console.log("getMe", userData)
           dispatch(setAuthUserData(userData))
         }
-      }catch(e){
-        console.log("getMyCred",e)
+      } catch (e) {
+        console.log("getMyCred", e)
       }
     }
+
     getMyCred()
   }, [])
-  
-  // useEffect(() => {
-  //     async function onWebSocket() {
-  //       await webSocket()
-  //     }
-  //   onWebSocket()
-  // }, [])
+
+  useEffect(() => {
+    let isNeedToReload = localStorage.getItem("needToReload")
+    if (isNeedToReload === "yes") {
+      console.log("reloaded")
+    }else{
+      localStorage.setItem("needToReload", "yes")
+      window.location.reload()
+    }
+
+    
+
+
+  }, [])
 
   return (
 
     <div className="App">
-      <div style={{width:"auto",minWidth:"310px",maxWidth:"350px",margin:"auto"}}>
-      {!address ?
-        (
-          <>
-            {
-              currentNft ?
-                <NftItemView/>
-                :
+      <div style={{width: "auto", minWidth: "310px", maxWidth: "350px", margin: "auto"}}>
+        {address ?
+          (
+            <>
+              {
+                currentNft ?
+                  <NftItemView/>
+                  :
 
-                (currentTrade ?
-                    <TradeView/>
-                    :
-                    <>
-                      
-                      <PopperApp/>
-                      <TitleMenu/>
-                      <NftView/>
-                    </>
-                )
-            }
-          </>)
-        :
-        <ConnectToTonKeeper
-          // handleGetLink={() => handleGetLink()}
-          // login={login}
-        />
-      }
+                  (currentTrade ?
+                      <TradeView/>
+                      :
+                      <>
+
+                        <PopperApp/>
+                        <TitleMenu/>
+                        <NftView/>
+                      </>
+                  )
+              }
+            </>)
+          :
+          <ConnectToTonKeeper
+            // handleGetLink={() => handleGetLink()}
+            // login={login}
+          />
+        }
 
 
-    </div>
+      </div>
     </div>
   );
 }
