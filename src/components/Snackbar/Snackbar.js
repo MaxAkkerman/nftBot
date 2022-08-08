@@ -19,7 +19,7 @@ export default function PositionedSnackbar() {
         anchorOrigin={{ vertical:'bottom', horizontal:'center' }}
         open={snack_open}
         onClose={handleClose}
-        autoHideDuration={5000}
+        autoHideDuration={2500}
         message={snack_msg}
         key={'bottom' + 'center'}
       />

@@ -104,7 +104,7 @@ export function TradeView() {
     <div className={"trade_item_container"}>
 
       <div className={"trade_item_data_wrap"}>
-        <div style={{alignSelf: "flex-start",height: "24px"}} onClick={() => dispatch(deleteCurrentTrade())}>
+        <div style={{height: "24px",width:"24px"}} onClick={() => dispatch(deleteCurrentTrade())}>
           {/*<CloseIcon style={{color: "#1976d2"}}/>*/}
           <img src={closeImg} alt={"close"}/>
         </div>

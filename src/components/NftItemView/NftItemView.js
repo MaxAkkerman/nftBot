@@ -62,7 +62,7 @@ export function NftItemView() {
   return (
     <div className={"trade_item_container"}>
       <div className={"trade_item_data_wrap"}>
-        <div style={{height: "24px"}} onClick={() => dispatch(deleteCurrentNft())}>
+        <div style={{height: "24px",width:"24px"}} onClick={() => dispatch(deleteCurrentNft())}>
           <img src={closeImg} alt={"close"}/>
         </div>
         <div className={"nft_title"}>
