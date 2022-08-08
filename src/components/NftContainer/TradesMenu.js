@@ -4,9 +4,7 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {
   requestUserTrades,
-  searchNftRequest,
   searchTradeRequest,
-  setCurrentNft,
   setCurrentTrade
 } from "../../redux/store/actions/market";
 import "./tradeMenu.css"
@@ -52,19 +50,15 @@ export function TradesMenu() {
 
   async function handleClickTradeAdded(e, nft) {
     let curF = user_trades_added.filter(it => e.currentTarget.id === it.id)
-    console.log("tradecer", e.currentTarget.id, curF)
     dispatch(setCurrentTrade(curF[0]))
   }
 
   async function handleClickTrade(e, nft) {
     let curF = user_trades.filter(it => e.currentTarget.id === it.id)
-    console.log("tradecer", e.currentTarget.id, curF)
     dispatch(setCurrentTrade(curF[0]))
   }
 
   return (
-
-
     <>
       <div className={"nft_custom_search_container"}>
         <AddCustomNft
@@ -91,9 +85,6 @@ export function TradesMenu() {
                            }}
                            className={"trade_item_wrapper"} id={item.id}
                            onClick={(e, item) => handleClickTradeAdded(e, item)} key={item.i}>
-              {/*<div className={"nft_item_img_wrap"}>*/}
-              {/*  <img src={item.image} alt={"img"}/>*/}
-              {/*</div>*/}
               <div>
                 Trade ID: {item.searchId}
               </div>
@@ -142,9 +133,6 @@ export function TradesMenu() {
                     border: `${tradeStatus.includes(item.status) ? "1px solid white" : null}`
                   }} className={"trade_item_wrapper"} id={item.id}
                                  onClick={(e, item) => handleClickTrade(e, item)} key={item.id}>
-                    {/*<div className={"nft_item_img_wrap"}>*/}
-                    {/*  <img src={item.image} alt={"img"}/>*/}
-                    {/*</div>*/}
                     <div>
                       Trade ID: {item.searchId ? item.searchId : "Closed sale"}
                     </div>
@@ -174,10 +162,6 @@ export function TradesMenu() {
             </div>
         )
       }
-
-
     </>
-
   )
-
 }

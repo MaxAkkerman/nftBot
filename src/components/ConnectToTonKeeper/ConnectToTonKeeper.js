@@ -1,13 +1,11 @@
 import "./ConnectToTonKeeper.css";
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import useHandleLogin from "../../hooks/useSelectPopup";
 import Loader from "../Loader/Loader.js";
 import {Button} from "@mui/material";
 import titleImg from "../../images/ton.png"
 
 export default function ConnectToTonKeeper() {
-  
-  console.log("ConnectToTonKeeper")
   const {handleGetLink, login} = useHandleLogin()
 
   let {loading, error,url,status} = login;

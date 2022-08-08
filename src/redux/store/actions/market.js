@@ -23,7 +23,8 @@ import {
   SEARCH_NFT_ITEM_SUCCESS,
   SEARCH_NFT_ITEM_REQUEST,
   SEARCH_TRADE_ITEM_SUCCESS,
-  SEARCH_TRADE_ITEM_FAILED, ADD_USER_TRADE_BY_SEARCH, DELETE_NFT_FROM_ARR
+  SEARCH_TRADE_ITEM_FAILED, ADD_USER_TRADE_BY_SEARCH, DELETE_NFT_FROM_ARR,
+  OPEN_SNACK,CLOSE_SNACK
 } from "./types";
 
 export function setWebSocketStatus(status) {
@@ -108,6 +109,20 @@ export function requestUserNftItemFailed(e) {
   };
 }
 
+export function openSnack(msg) {
+  console.log("openSnack",msg)
+  return {
+    type: OPEN_SNACK,
+    payload:msg
+  };
+}
+export function closeSnack() {
+  console.log("closeSnack")
+  return {
+    type: CLOSE_SNACK,
+  };
+}
+
 export function setCurrentNft(nft) {
   console.log("setCurrentNft",nft)
   return {
@@ -183,8 +198,6 @@ export function searchTradeFailed(e) {
     payload:e
   };
 }
-
-
 
 export function requestUserTrades() {
   console.log("requestUserTrades")

@@ -1,6 +1,4 @@
 import {getMe} from "../network/requests";
-import {setAuthUserData} from "../redux/store/actions/market";
-import {reduxStore} from "../lib/redux";
 
 export function getSplicedAddress(string){
   let spliced = string.slice(0, 6);

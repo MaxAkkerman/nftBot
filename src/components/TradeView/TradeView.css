@@ -1,6 +1,6 @@
 .trade_item_container{
   display: flex;
-  padding: 15px;
+  padding: 5px 10px;
   flex-direction: column;
 }
 .trade_item_data_wrap{
@@ -11,8 +11,8 @@
 }
 .trade_item_img_wrap{
   height: fit-content;
-  width:100%;
-  margin-top:40px;
+  width:90%;
+  margin: 20px auto auto;
 }
 .trade_item_wrap{
   height: fit-content;
@@ -24,6 +24,13 @@
   display: flex;
   flex-direction: column;
   padding: 14px;
-  height: 150px;
+  height: 120px;
   justify-content: space-around;
+}
+.tradID_hover{
+  cursor: pointer;
+  color:#1976d2;
+}
+.tradID_hover:hover{
+  color:orange;
 }

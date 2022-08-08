@@ -18,7 +18,7 @@ import {
   SEARCH_NFT_ITEM_FAILED,
   SEARCH_NFT_ITEM_SUCCESS,
   SEARCH_TRADE_ITEM_SUCCESS,
-  SEARCH_TRADE_ITEM_FAILED, TRADE_UPDATE, ADD_USER_TRADE_BY_SEARCH, DELETE_NFT_FROM_ARR
+  SEARCH_TRADE_ITEM_FAILED, TRADE_UPDATE, ADD_USER_TRADE_BY_SEARCH, DELETE_NFT_FROM_ARR, OPEN_SNACK, CLOSE_SNACK
 } from "../actions/types";
 
 
@@ -32,11 +32,6 @@ const user_data = {
   fetchMeLoading: false,
   fetchMeError: null,
 }
-let mock = {name: "NFTtest", collectionName: "NFTCollectionNametest", address: "test address", image: mockIcon}
-let arr = []
-for (let i = 0; i < 7; i++) {
-  arr.push({...mock, index: i})
-}
 
 const user_trades = {
   user_trades: {},
@@ -48,15 +43,16 @@ const user_nfts = {
   userNftItemLoading: false,
   userNftItemError: null,
 }
-
+const snack_state = {
+  snack_open: false,
+  snack_msg: null,
+}
 const user_trades_added = null
-
-const searchNftItemE = null
-const searchTradeItemE = null
 
 const currentNft = null
 const currentTrade = null
 const initialState = {
+  ...snack_state,
   ...websocket,
   ...user_data,
   ...user_nfts,
@@ -67,26 +63,31 @@ const initialState = {
 };
 
 export default function appReducer(state = initialState, action) {
-  console.log("state",state)
   switch (action.type) {
+    case OPEN_SNACK:
+      return produce(state, (draft) => {
+        draft.snack_open = true;
+        draft.snack_msg = action.payload.msg;
+      });
+    case CLOSE_SNACK:
+      return produce(state, (draft) => {
+        draft.snack_open = false;
+        draft.snack_msg = null;
+      });
+    
     case DELETE_NFT_FROM_ARR:
-      console.log("action.payload", action)
       return produce(state, (draft) => {
         let newArr = [...draft.user_nfts_array]
         let filteredArr = newArr.filter(fr => fr.address !== action.payload)
-        console.log("newArr", filteredArr)
         draft.user_nfts_array = [...filteredArr];
       });
     case ADD_USER_TRADE_BY_SEARCH:
-      console.log("action.payload", action)
       return produce(state, (draft) => {
         draft.user_trades_added = [...draft.user_trades_added, action.payload];
       });
     case SEARCH_NFT_ITEM_SUCCESS:
-      console.log("action.payload", action)
       return produce(state, (draft) => {
         if(!action.payload || action.payload.ownerAddress === state.address) {
-          console.log("you have the save NFT")
           return
         }
         draft.user_nfts_array === null ?
@@ -100,7 +101,6 @@ export default function appReducer(state = initialState, action) {
       });
     case TRADE_UPDATE:
       return produce(state, (draft) => {
-        console.log("TRADE_UPDATE",action.payload)
         if (state.address !== action.payload.data.sellerAddress) {
           draft.user_trades_added === null ?
             draft.user_trades_added = [action.payload.data]
@@ -119,7 +119,6 @@ export default function appReducer(state = initialState, action) {
       });
     case SEARCH_TRADE_ITEM_SUCCESS:
       return produce(state, (draft) => {
-        console.log("draft.user_trades_added", draft.user_trades_added)
         draft.user_trades_added === null ?
           draft.user_trades_added = [action.payload]
           :
@@ -205,8 +204,6 @@ export default function appReducer(state = initialState, action) {
         draft.user_trades_loading = false;
         draft.user_trades_error = true;
       });
-
-
     default:
       return state;
   }

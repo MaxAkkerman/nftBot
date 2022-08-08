@@ -26,6 +26,8 @@ export const TRADE_UPDATE = "TRADE_UPDATE";
 export const ADD_USER_TRADE_BY_SEARCH = "ADD_USER_TRADE_BY_SEARCH";
 export const DELETE_NFT_FROM_ARR = "DELETE_NFT_FROM_ARR";
 
+export const OPEN_SNACK = "OPEN_SNACK";
+export const CLOSE_SNACK = "CLOSE_SNACK";
 
 
 

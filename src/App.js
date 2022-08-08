@@ -8,8 +8,9 @@ import {TitleMenu} from "./components/TitleMenu/TitleMenu";
 import {NftView} from "./components/NftContainer/NftContainer";
 import {NftItemView} from "./components/NftItemView/NftItemView";
 import {TradeView} from "./components/TradeView/TradeView";
-import {getMe} from "./network/requests";
+import {getLoginToken, getMe} from "./network/requests";
 import {setAuthUserData} from "./redux/store/actions/market";
+import PositionedSnackbar from "./components/Snackbar/Snackbar";
 
 function App() {
   const dispatch = useDispatch();
@@ -17,72 +18,68 @@ function App() {
   const currentNft = useSelector((state) => state.appReducer.currentNft);
   const currentTrade = useSelector((state) => state.appReducer.currentTrade);
 
+  useEffect(()=>{
+    async function connect(){
+      const res = await getLoginToken().then(async()=>await webSocket())
+      console.log("in index ",res)
+      // async function onWebSocket() {
+      //   await webSocket()
+      // }
+
+      // onWebSocket().then(res=>console.log("onWebSocket", res))
+    }
+    connect()
+    
+  },[])
   useEffect(() => {
     async function getMyCred() {
       try {
         const res = await getMe()
-        console.log("res", res)
         if (res.status === 201 || res.status === 200) {
-          console.log("res", res)
           let userData = await res.data
-          console.log("getMe", userData)
           dispatch(setAuthUserData(userData))
         }
       } catch (e) {
         console.log("getMyCred", e)
       }
     }
-
     getMyCred()
   }, [])
 
   useEffect(() => {
     let isNeedToReload = localStorage.getItem("needToReload")
-    if (isNeedToReload === "yes") {
-      console.log("reloaded")
-    }else{
+    if (isNeedToReload !== "yes") {
       localStorage.setItem("needToReload", "yes")
       window.location.reload()
     }
-
-    
-
-
-  }, [])
+    }, [])
 
   return (
 
     <div className="App">
-      <div style={{width: "auto", minWidth: "310px", maxWidth: "350px", margin: "auto"}}>
+      <div className={"app_container"}>
         {address ?
-          (
             <>
               {
                 currentNft ?
                   <NftItemView/>
                   :
-
                   (currentTrade ?
                       <TradeView/>
                       :
                       <>
-
                         <PopperApp/>
                         <TitleMenu/>
                         <NftView/>
                       </>
                   )
               }
-            </>)
+            </>
           :
-          <ConnectToTonKeeper
-            // handleGetLink={() => handleGetLink()}
-            // login={login}
-          />
+          <ConnectToTonKeeper/>
         }
-
-
       </div>
+      <PositionedSnackbar/>
     </div>
   );
 }

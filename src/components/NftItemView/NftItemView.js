@@ -1,17 +1,14 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import "./NftItemView.css"
 import {Button} from "@mui/material";
 import {makeStyles} from "@mui/styles";
 import {openSaleRequest} from "../../network/requests";
-import CloseIcon from '@mui/icons-material/HighlightOff';
-import {deleteCurrentNft, deleteNftFromArr} from "../../redux/store/actions/market";
+import {deleteCurrentNft, deleteNftFromArr, openSnack} from "../../redux/store/actions/market";
 import InputBase from "@mui/material/InputBase";
 import Paper from "@mui/material/Paper";
-import mockIcon2 from "../../images/title.png"
 import {getSplicedAddress} from "../../utils/utils";
 import closeImg from "../../images/close.svg";
-
 
 const useStyles = makeStyles({
   input: {
@@ -29,7 +26,6 @@ const useStyles = makeStyles({
   },
 });
 
-
 export function NftItemView() {
   const dispatch = useDispatch();
   const currentNft = useSelector((state) => state.appReducer.currentNft);
@@ -39,27 +35,30 @@ export function NftItemView() {
   const [urlSale, setUrlSale] = useState(null)
 
   async function openSale() {
-    if(!sellPrice)return
-    async function getURLforSale(){
+    if (!sellPrice) return
+
+    async function getURLforSale() {
       try {
         let res = await openSaleRequest(currentNft.address, sellPrice)
         if (res.status === 200 || res.status === 201) {
-          console.log("getURLforSale",res.data)
           return res.data
         }
       } catch (e) {
-        console.log("openSalejson error", e)
+        throw e
       }
     }
-    getURLforSale().then(data=>setUrlSale(data))
+
+    getURLforSale()
+      .then(data => setUrlSale(data))
+      .catch(e => dispatch(openSnack({msg: `Some error: ${e}`})))
   }
-  
-  function quitWinT(){
+
+  function quitWinT() {
     dispatch(deleteCurrentNft())
     dispatch(deleteNftFromArr(currentNft.address))
     setUrlSale(null)
   }
-  
+
   return (
     <div className={"trade_item_container"}>
       <div className={"trade_item_data_wrap"}>
@@ -70,7 +69,6 @@ export function NftItemView() {
           User NFT
         </div>
       </div>
-
       <div className={"trade_item_wrap"} key={currentNft.index}>
         <div className={"trade_item_img_wrap"}>
           <img style={{borderRadius: "25px"}} src={currentNft.image} alt={"img"}/>
@@ -88,7 +86,6 @@ export function NftItemView() {
           <div>
             Collection Address: {getSplicedAddress(currentNft.collectionAddress)}
           </div>
-          
         </div>
         <div className={"set_price_input_wrap"}>
           <Paper
@@ -100,14 +97,14 @@ export function NftItemView() {
               width: 400,
               background: "transparent",
               border: "1px solid rgba(25, 118, 210, 0.5)",
-              color: "#1976d2",borderRadius: "7px 7px 7px 7px"
+              color: "#1976d2", borderRadius: "7px 7px 7px 7px"
             }}
             variant={"outlined"}
           >
             <InputBase
               sx={{ml: 1, flex: 1, color: "#1976d2", opacity: "1"}}
               placeholder="Set your price"
-              inputProps={{'aria-label': 'OutlinedInput',min:0}}
+              inputProps={{'aria-label': 'OutlinedInput', min: 0}}
               type={"number"}
               className={classes.input}
               variant={"outlined"}
@@ -116,27 +113,31 @@ export function NftItemView() {
             />
           </Paper>
         </div>
-        <Button variant="outlined" sx={{fontSize: "10px", width: "100%", marginTop: "10px",borderRadius: "7px 7px 7px 7px", height:"40px"}} onClick={() => openSale()}>
+        <Button variant="outlined" sx={{
+          fontSize: "10px",
+          width: "100%",
+          marginTop: "10px",
+          borderRadius: "7px 7px 7px 7px",
+          height: "40px"
+        }} onClick={() => openSale()}>
           Open Sale
         </Button>
-        
         {urlSale &&
         <div style={{marginTop: "20px", marginBottom: "10px"}}>
-            Are you sure?
+          Are you sure?
           <a href={urlSale}>
-            <Button variant="outlined" sx={{fontSize: "10px", width: "100%", marginTop: "10px",borderRadius: "7px 7px 7px 7px"}}>
-            Yes
-          </Button>
+            <Button variant="outlined"
+                    sx={{fontSize: "10px", width: "100%", marginTop: "10px", borderRadius: "7px 7px 7px 7px"}}>
+              Yes
+            </Button>
           </a>
-          <Button variant="outlined" sx={{fontSize: "10px", width: "100%", marginTop: "10px",borderRadius: "7px 7px 7px 7px"}} onClick={() => quitWinT()}>
-         No
+          <Button variant="outlined"
+                  sx={{fontSize: "10px", width: "100%", marginTop: "10px", borderRadius: "7px 7px 7px 7px"}}
+                  onClick={() => quitWinT()}>
+            No
           </Button>
-          </div>
+        </div>
         }
-        
-        
-        
-        
       </div>
     </div>
   )

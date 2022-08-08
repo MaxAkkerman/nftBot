@@ -1,9 +1,7 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Popper from '@mui/material/Popper';
 import SettingsIcon from "../../images/settings.svg";
 import "./index.css"
-import ExitIcon from "../../images/exit.png"
 import {makeStyles} from "@mui/styles";
 import {logOutRequest} from "../../network/requests";
 import {setAuthUserData} from "../../redux/store/actions/market";
@@ -43,19 +41,9 @@ export default function PopperApp() {
       </button>
       
       <Popper id={id} open={open} anchorEl={anchorEl} className={classes.root} sx={{top: "10px",left: "-17px"}}>
-        {/*<div style={{height: "30px", display: "flex", cursor:"pointer"}} onClick={()=>logOut()}>*/}
           <Button onClick={()=>logOut()} style={{alignSelf: "center",color:"#1976d2"}}>
             Log out
           </Button>
-            {/*<div style={{marginLeft: "22px"}}>*/}
-            {/*  <img src={ExitIcon} alt={"Exit"}/>*/}
-            {/*</div>*/}
-
-         
-          
-          
-        {/*</div>*/}
-        
       </Popper>
     </div>
   );
