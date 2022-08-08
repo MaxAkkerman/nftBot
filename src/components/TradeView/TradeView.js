@@ -63,7 +63,7 @@ export function TradeView() {
 
     getURLforSale()
       .then(data => setUrlClose(data))
-      .catch(e=>dispatch(openSnack({msg: `Some error: ${e}`})))
+      .catch(e=>dispatch(openSnack({msg: `Some error: ${e.response.status}`})))
 
 
   }

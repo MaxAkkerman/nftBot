@@ -50,7 +50,7 @@ export function NftItemView() {
 
     getURLforSale()
       .then(data => setUrlSale(data))
-      .catch(e => dispatch(openSnack({msg: `Some error: ${e}`})))
+      .catch(e => dispatch(openSnack({msg: `Some error: ${e.response.status}`})))
   }
 
   function quitWinT() {
